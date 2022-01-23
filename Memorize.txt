@@ -1,0 +1,29 @@
+LeiYuXin-Core 项目纪念墙：
+
+2022年1月11日，晚上20:26:13，
+框架发出来第一个成功的JSON！！！
+{
+	"code": 200,
+	"msg": "操作成功",
+	"data": {
+		"base64Img": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0a\r\nHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIy\r\nMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAAoAHgDASIA\r\nAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQA\r\nAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3\r\nODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWm\r\np6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEA\r\nAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\r\nBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\r\nU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\r\nuLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD0IU8U\r\n0CpFoAcKqapq9no0EM147Ks86W8YVSzM7nAAA6//AFqbqGtaXo8e/UdQtrUYyPOlCk/QHk/hXLWN\r\n03jXxlY6hDaXS6FpcTywTzRFFubhvlDKDyQFyQfWgDvhT1poppureOZYXmjWRuis2CeQP5so/EUA\r\nWAKkFMUg9CDUg4oAeKkWsPxBrEGnaReSC+jt5olAMhAbyic4Yr6cH8j6VyHwz1G/u2v77W5zHM25\r\nikhKFMBS/wAnQDa0TZ/2setAHpy1IBXl+p/GSy03XZ9NTSLu5+z5EzwjO1hww98Nlc9M12994mst\r\nL8Pyaxe5hhCu0aMfmlCqzDb9VUke1AG6KkFfO+p+MPib4g0648RabA+m6FbguAm0ZUDcSSfmIwOv\r\nSvVPhZ4sufGHg5L+8A+0wym3lcDG5gAc/kwoA7cUU4CigDiwK8u+KOqXt9r2ieFdJuJIbqaUSyPE\r\n5UqSdq8j0G4n8K9SFef+L/hte+I/Ey6zY6yNPkWFYxtjO7IzzuBHY4oAu6Z8LfDekyC+nhutTvI2\r\nEgkuZSxLDvtGAfxzWVLrXxC8SS3H9iWsGlWcTFRJcAbmAOOMg1iav8OPE2ladJeHxheTBOqq0g/9\r\nnrlNM0vUdZ0W6vb7xgLaCNAfKnuXYyEgkLjPXjFAHonwn8UatqmqavaatqBuY7RM+Y5HZiMg+mAa\r\nxrK01L4g+M7oXGo3VkLRgqGNtu7D7jj3ACH8BXJeDPCN/wCIdQntLPVprH93vDbSPMU8HgMPfirm\r\nqeC/EHhu/P2jVrqKPljcw7zzxk4U56DOT2HOMUAdcdX8SeEfFlrpGo3k9/DkGKXeEDDGcMCDuAUN\r\n0xz712PjXxvLpeixw2ULpqN5tSLLJhC33ST3yOcDnHpXhZGonVbSJdWnkJk2R3N5Bny33ZOCxbAJ\r\nGc557966HxvonjTQxp91qepQ30ZUxxPCCMK3JUjA6j07Z7UAa/iTwFdnwjFquq6m0t+cyiBMZAZg\r\nW2jksPu4A4G7oK6fwFo8l58N9TtZVmikeF1O4fvhLtIk68jOFH4VxVx4s8a694eFsNG0yS2jRf3s\r\nK4fa2cDl++3dgDPyjtWj4M8VeJdK0Z4v+EL1DUVwp+020jCQc7uflYnJ5/GgDO8D6f4oh8WyppF5\r\nb3gjmMU32nqy5WRzznnPvyRXvXiTwjp3i2xtrPVWmaGF/MxE+zedpXn2wTXgfw/8bWXhPxBqV5d6\r\nLqbCclZEiTe0cm4knDEYOOCPavQdR+PXhsaTctp6Xgvwh8qK4gwN3uQTQAvxI15YLC3+H3hiDzL2\r\n5jWBkiORDEONp/D17V3fgLwqng/wpa6UGDSjMkzDoznqf0A/CvnHwz8Tx4ZubzU00hL7Wrx2aW8u\r\npicAnIAAGf1r3v4cfEG28Z6LFLdz2FvqryOv2KKYbyq8ghCd3Tn8KAO7AopRRQBxi09aKKAHPEk0\r\nTRyKGRhhge4rlLf4XeFYNT+3CwLSb94RnygOSen44/AUUUAdVZ6ZY2LyPa2sULyHLsiAFjgD+g/K\r\nuO8ReHNRi1h9W0+JZo3YedbP80bH+F8YOMZwwweOQVPzKUUAeb6+Nd8S63pVnJpJs1tnVHUhUbIO\r\nGxkljhdvT7wAbABAH0I+nWtzYJazwRyxBAoDorYwPpj9KKKAItN8PaZpjBra2Xfs2b5PnY85J3Hn\r\nJ7+uB6CtaONIxhFVR6AYoooAzofDWlw64dYitljvDu3MvAYkAbiPXGRn/aPrUur+GtI8QBV1Wyju\r\nkUYCv06g/wAwKKKAKz+AvCE0ex/DGkY9rOMH8wM0aV8PfCmi6vFqum6LDa3sQYJJGzjG4EHjOOhP\r\naiigDqlooooA/9k=",
+		"token": "d7f2a421-16e7-4ec6-a4f2-027c7de10ae0"
+	}
+}
+框架发出的第一个关于雷雨鑫的JSON
+{
+	"code": 200,
+	"msg": "操作成功",
+	"data": [
+		{
+			"id": 1,
+			"username": "雷雨鑫",
+			"userpassword": "$2a$10$jwP5TFFefzJ4Dx7BdxxG3.KixY2BdCx/ETPFpxn/RTgFKG7F3Kg.m",
+			"usersex": "女",
+			"userstate": true,
+			"userbirthday": "2001-01-01",
+			"userphone": "17731587881",
+			"userrole": "999"
+		}
+	]
+}
