@@ -1,6 +1,6 @@
 package com.iloveleiyuxin.websitmanager.entity;
 
-import com.iloveleiyuxin.entity.BaseEntity;
+import com.iloveleiyuxin.websitmanager.entity.BaseEntity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
