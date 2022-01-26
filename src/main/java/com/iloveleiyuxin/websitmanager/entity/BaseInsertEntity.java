@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 
 @Data
-public class BaseEntity {
-    @TableId(type = IdType.AUTO)
+public class BaseInsertEntity {
+    @TableId(type = IdType.INPUT)
     private Integer id;
 }

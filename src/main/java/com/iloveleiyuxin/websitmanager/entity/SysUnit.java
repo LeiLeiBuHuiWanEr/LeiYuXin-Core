@@ -15,9 +15,9 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SysUnit extends BaseEntity {
+public class SysUnit extends BaseInsertEntity {
     public SysUnit(Integer id, String description, Integer building, Integer houseCounts){
-        this.id = id;
+        this.setId(id);
         this.building = building;
         this.description = description;
         this.housecounts = houseCounts;

@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-public class SysHouse extends BaseEntity {
+public class SysHouse extends BaseInsertEntity {
 
     private static final long serialVersionUID = 1L;
 
