@@ -3,6 +3,7 @@ package com.iloveleiyuxin.websitmanager.mapper;
 import com.iloveleiyuxin.websitmanager.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -12,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author LeiYuXin's Boyfriend
  * @since 2022-01-02
  */
+@Repository
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
 }
