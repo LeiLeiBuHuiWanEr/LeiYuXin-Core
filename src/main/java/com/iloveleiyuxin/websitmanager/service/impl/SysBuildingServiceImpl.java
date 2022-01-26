@@ -1,6 +1,8 @@
 package com.iloveleiyuxin.websitmanager.service.impl;
 
+import com.iloveleiyuxin.websitmanager.common.exception.LeiYuXinFallenInLoveException;
 import com.iloveleiyuxin.websitmanager.entity.SysBuilding;
+import com.iloveleiyuxin.websitmanager.entity.SysUnit;
 import com.iloveleiyuxin.websitmanager.mapper.SysBuildingMapper;
 import com.iloveleiyuxin.websitmanager.mapper.SysUnitMapper;
 import com.iloveleiyuxin.websitmanager.service.ISysBuildingService;
@@ -28,7 +30,13 @@ public class SysBuildingServiceImpl extends ServiceImpl<SysBuildingMapper, SysBu
 
     @Override
     @Transactional
-    public void addBuilding(Integer buildingNo, Integer units) {
-
+    public boolean addBuilding(Integer buildingNo, Integer units) {
+        SysBuilding sysBuilding = new SysBuilding(buildingNo,buildingNo+"楼",units,0);
+        System.out.println(sysBuilding);
+        sysBuildingMapper.insert(sysBuilding);
+        for (int i = 0; i < units; i++) {
+            sysUnitMapper.insert(new SysUnit(buildingNo*100+i+1,buildingNo+"楼"+(i+1)+"门",buildingNo,0));
+        }
+        return true;
     }
 }

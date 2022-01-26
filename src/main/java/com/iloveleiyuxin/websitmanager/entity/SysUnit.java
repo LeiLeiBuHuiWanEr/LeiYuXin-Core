@@ -16,6 +16,12 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class SysUnit extends BaseEntity {
+    public SysUnit(Integer id, String description, Integer building, Integer houseCounts){
+        this.id = id;
+        this.building = building;
+        this.description = description;
+        this.housecounts = houseCounts;
+    }
 
     private static final long serialVersionUID = 1L;
 

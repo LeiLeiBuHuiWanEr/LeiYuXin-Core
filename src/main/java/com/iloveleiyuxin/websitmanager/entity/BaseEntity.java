@@ -6,6 +6,6 @@ import lombok.Data;
 
 @Data
 public class BaseEntity {
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    @TableId(type = IdType.INPUT)
+    protected Integer id;
 }

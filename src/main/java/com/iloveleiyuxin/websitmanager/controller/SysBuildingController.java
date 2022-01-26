@@ -48,7 +48,13 @@ public class SysBuildingController extends BaseController {
 
     @GetMapping("/operate/insertBuilding")
     public Response insertBuilding(){
-        return Response.succ("");
+        String buildingNo = req.getParameter("building");
+        String units = req.getParameter("units");
+        boolean bool = sysBuildingService.addBuilding(Integer.valueOf(buildingNo),Integer.valueOf(units));
+        if(bool){
+            return Response.succ("");
+        }else return Response.fail("失败");
+
     }
 
 }

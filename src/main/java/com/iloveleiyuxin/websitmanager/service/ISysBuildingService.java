@@ -12,6 +12,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-01-23
  */
 public interface ISysBuildingService extends IService<SysBuilding> {
-    void addBuilding(Integer buildingNo,Integer units);
+    boolean addBuilding(Integer buildingNo,Integer units);
 
 }
