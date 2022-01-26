@@ -2,11 +2,16 @@ package com.iloveleiyuxin.websitmanager.utils;
 
 import io.jsonwebtoken.*;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
+@Slf4j
 @Data
 @Component
 @ConfigurationProperties(prefix = "com.iloveleiyuxin.websitmanager.jwt")
@@ -38,14 +43,14 @@ public class JwtUtils {
                     .setSigningKey(secret)
                     .parseClaimsJws(jwt)
                     .getBody();
-        } catch (Exception e) {
+        }catch (ExpiredJwtException e){
+            log.warn("LeiYuXin-Core警告：Token已过期！");
+            return null;
+        }
+        catch (Exception e) {
             return null;
         }
     }
 
-    // jwt是否过期
-    public boolean isTokenExpired(Claims claims) {
-        return claims.getExpiration().before(new Date());
-    }
 
 }
