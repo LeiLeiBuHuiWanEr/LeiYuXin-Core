@@ -37,5 +37,8 @@ public class BaseController {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
+    ICliUserService cliUserService;
+
+    @Autowired
     JwtUtils jwtUtils;
 }

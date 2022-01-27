@@ -18,6 +18,16 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class SysHouse extends BaseInsertEntity {
 
+    public SysHouse(Integer id,Integer building, Integer unit, String name, Integer state, BigDecimal area, BigDecimal servicefeebasic) {
+        this.setId(id);
+        this.building = building;
+        this.unit = unit;
+        this.name = name;
+        this.state = state;
+        this.area = area;
+        this.servicefeebasic = servicefeebasic;
+    }
+
     private static final long serialVersionUID = 1L;
 
     private Integer building;

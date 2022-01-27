@@ -34,17 +34,12 @@ public class SysBuildingServiceImpl extends ServiceImpl<SysBuildingMapper, SysBu
     @Transactional
     public boolean addBuilding(Integer buildingNo, Integer units) {
         log.info("开始事务");
-        try {
-            SysBuilding sysBuilding = new SysBuilding(buildingNo,buildingNo+"楼",units,0);
-            sysBuildingMapper.insert(sysBuilding);
-            for (int i = 0; i < units; i++) {
-                sysUnitMapper.insert(new SysUnit(buildingNo*100+i+1,buildingNo+"楼"+(i+1)+"门",buildingNo,0));
-            }
-            log.info("结束事务");
-            return true;
-        }catch (Exception e){
-            log.info("由于抛出"+e.getClass().getName()+",事务失败");
+        SysBuilding sysBuilding = new SysBuilding(buildingNo,buildingNo+"楼",units,0);
+        sysBuildingMapper.insert(sysBuilding);
+        for (int i = 0; i < units; i++) {
+            sysUnitMapper.insert(new SysUnit(buildingNo*100+i+1,buildingNo+"楼"+(i+1)+"门",buildingNo,0));
         }
-        return false;
+        log.info("结束事务");
+        return true;
     }
 }

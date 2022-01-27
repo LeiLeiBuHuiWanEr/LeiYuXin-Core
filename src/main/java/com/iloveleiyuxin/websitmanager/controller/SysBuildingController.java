@@ -54,7 +54,6 @@ public class SysBuildingController extends BaseController {
         if(bool){
             return Response.succ("");
         }else return Response.fail("失败");
-
     }
 
 }
