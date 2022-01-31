@@ -2,6 +2,8 @@ package com.iloveleiyuxin.websitmanager.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.LeiYuXinFallenInLoveException;
@@ -14,6 +16,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,20 +47,45 @@ public class SysUserController extends BaseController {
 
     @GetMapping("info/listUser")
     public Response getUserList(){
-        List<SysUser> resultList = sysUserService.getUserList();
-        if(resultList.size() == 0){
-            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空!!",resultList);
+        String current = req.getParameter("current");
+        String size = req.getParameter("size");
+        if(current != null && size != null){
+            IPage<SysUser> resultPage = new Page<>(Integer.parseInt(current),Integer.parseInt(size));
+            resultPage = sysUserService.page(resultPage,new QueryWrapper<SysUser>().in("userRole",2));
+            if(resultPage.getRecords().size() == 0){
+                return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"当前页溢出！！");
+            }
+            return Response.succ(resultPage);
         }
-        return Response.succ(resultList);
+        else{
+            List<SysUser> resultList = sysUserService.getUserList();
+            if(resultList.size() == 0){
+                return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空!!",resultList);
+            }
+            return Response.succ(resultList);
+        }
+
     }
 
     @GetMapping("info/listAll")
     public Response getAllUserAndAdminList(){
-        List<SysUser> resultList = sysUserService.list();
-        if(resultList.size() == 0){
-            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空!!",resultList);
+        String current = req.getParameter("current");
+        String size = req.getParameter("size");
+        if(current != null && size != null){
+            IPage<SysUser> resultPage = new Page<>(Integer.parseInt(current),Integer.parseInt(size));
+            resultPage = sysUserService.page(resultPage);
+            if(resultPage.getRecords().size() == 0){
+                return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"当前页溢出!!");
+            }
+            return Response.succ(resultPage);
+        }else{
+            List<SysUser> resultList = sysUserService.list();
+            if(resultList.size() == 0){
+                return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空!!",resultList);
+            }
+            return Response.succ(resultList);
         }
-        return Response.succ(resultList);
+
     }
 
     @PreAuthorize("hasAnyAuthority('ROLE_1','ROLE_999')")
