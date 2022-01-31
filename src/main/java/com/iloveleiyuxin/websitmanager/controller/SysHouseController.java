@@ -5,12 +5,12 @@ import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.entity.SysHouse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-import com.iloveleiyuxin.websitmanager.controller.BaseController;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +29,10 @@ import java.util.Map;
 @RequestMapping("/sys-house")
 public class SysHouseController extends BaseController {
 
+    /**
+     * 新增一个房屋
+     * @return
+     */
     @GetMapping("operate/addHouse")
     public Response addHouse(){
         String buildingNo = req.getParameter("buildingNo");
@@ -61,7 +65,7 @@ public class SysHouseController extends BaseController {
 
     /**
      * 楼、单元、门牌号的房屋查询
-     * @return
+     * @return 标准返回格式
      */
     @GetMapping("info/select")
     public Response selectByThreeKey(){
@@ -115,5 +119,22 @@ public class SysHouseController extends BaseController {
         return Response.succ(result);
 
     }
+        /**
+        *  删除房间（敏感权限，仅能由超级管理员操作）
+        */
+    @PreAuthorize("hasAuthority('ROLE_999')")
+    @GetMapping("/operate/deleteById")
+    public Response delHouse(){
+        String id = req.getParameter("id");
+        if(id == null){
+            return Response.fail(CodeEnum.NEED_PARAM,"缺失参数");
+        }
+
+        sysHouseService.removeHouse(id);
+
+        return Response.succ("");
+
+    }
+
 
 }

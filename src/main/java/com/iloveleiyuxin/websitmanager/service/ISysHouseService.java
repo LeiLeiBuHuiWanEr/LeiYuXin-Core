@@ -24,4 +24,16 @@ public interface ISysHouseService extends IService<SysHouse> {
      */
     boolean addHouse(String buildingNo,String unitNo,String houseNo,Double area,Double fee);
 
+    /**
+     * 删除一间房屋
+     * @param id 房间具体id
+     * @return
+     */
+    boolean removeHouse(String id);
+
+    /**
+     * 修改房屋信息
+     */
+    boolean updateHouse(String id,Double fee,Double area,String description);
+
 }

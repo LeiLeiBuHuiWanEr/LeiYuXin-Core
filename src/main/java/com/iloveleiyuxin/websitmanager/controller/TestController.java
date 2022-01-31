@@ -28,7 +28,7 @@ public class TestController extends BaseController{
 
     @GetMapping("/test/t")
     public Response test() {
-        return Response.succ(sysHouseService.addHouse("105","1","101",82.2,2.50));
+        return Response.succ(sysHouseService.updateHouse("10101101",82.2,2.50,""));
     }
 
     @GetMapping("test/redis")
