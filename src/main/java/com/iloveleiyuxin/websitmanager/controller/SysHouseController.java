@@ -1,6 +1,9 @@
 package com.iloveleiyuxin.websitmanager.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.entity.SysHouse;
@@ -28,6 +31,28 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys-house")
 public class SysHouseController extends BaseController {
+    /**
+     * 查询所有房屋，使用分页
+     */
+    @GetMapping("info/listAll")
+    public Response getAllHouse(){
+        String current = req.getParameter("current");
+        String size = req.getParameter("size");
+        if(current != null && size != null){
+            IPage<SysHouse> resultPage = new Page<>(Integer.parseInt(current),Integer.parseInt(size));
+            resultPage = sysHouseService.page(resultPage);
+            if(resultPage.getRecords().size() == 0){
+                return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"当前页溢出！！");
+            }
+            return Response.succ(resultPage.getRecords());
+        }else{
+            List<SysHouse> resultList = sysHouseService.list();
+            if(resultList == null){
+                return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空");
+            }
+            return Response.succ(resultList);
+        }
+    }
 
     /**
      * 新增一个房屋
@@ -129,7 +154,6 @@ public class SysHouseController extends BaseController {
         if(id == null){
             return Response.fail(CodeEnum.NEED_PARAM,"缺失参数");
         }
-
         sysHouseService.removeHouse(id);
 
         return Response.succ("");

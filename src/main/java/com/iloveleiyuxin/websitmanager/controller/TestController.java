@@ -9,11 +9,11 @@ import com.iloveleiyuxin.websitmanager.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController extends BaseController{
@@ -28,7 +28,7 @@ public class TestController extends BaseController{
 
     @GetMapping("/test/t")
     public Response test() {
-        return Response.succ(sysHouseService.updateHouse("10101101",82.2,2.50,""));
+        return Response.succ(sysHouseService.updateHouse("10101101",82.2,2.50,"我爱雷雨鑫"));
     }
 
     @GetMapping("test/redis")
@@ -50,6 +50,13 @@ public class TestController extends BaseController{
         System.out.println("匹配结果：" + matches);
 
         return Response.succ(password);
+    }
+
+    @PostMapping("test/map")
+    public Response mapTest(@RequestBody Map map){
+        String s = req.getParameter("userName");
+        System.out.println(s);
+        return Response.succ(map);
     }
 
 }

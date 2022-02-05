@@ -3,6 +3,7 @@ package com.iloveleiyuxin.websitmanager.entity;
 import java.time.LocalDate;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.iloveleiyuxin.websitmanager.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class CliUser extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
@@ -64,5 +66,24 @@ public class CliUser extends BaseEntity {
     @TableField("lowIncome")
     private Integer lowincome;
 
+    @TableField("registerDate")
+    private LocalDate registerdate;
 
+
+    public CliUser(Integer id,String username, String nickname, String userpassword, String sex, LocalDate birthday, String phone, Integer clirole, Integer locate, Integer healthstate, Integer quarantinestate, Integer permanentresidence, Integer lowincome, LocalDate registerdate) {
+        this.setId(id);
+        this.username = username;
+        this.nickname = nickname;
+        this.userpassword = userpassword;
+        this.sex = sex;
+        this.birthday = birthday;
+        this.phone = phone;
+        this.clirole = clirole;
+        this.locate = locate;
+        this.healthstate = healthstate;
+        this.quarantinestate = quarantinestate;
+        this.permanentresidence = permanentresidence;
+        this.lowincome = lowincome;
+        this.registerdate = registerdate;
+    }
 }

@@ -34,6 +34,9 @@ public class BaseController {
     ISysUnitService sysUnitService;
 
     @Autowired
+    ISysCarService sysCarService;
+
+    @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
@@ -41,4 +44,5 @@ public class BaseController {
 
     @Autowired
     JwtUtils jwtUtils;
+
 }

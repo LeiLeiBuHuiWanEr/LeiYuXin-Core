@@ -13,4 +13,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface ICliUserService extends IService<CliUser> {
 
+    /**
+     * 添加一个用户,由于里面有事务，需要调用sysUnit，不能简单的使用BaseService
+     */
+    boolean addCliUser(CliUser user);
+
+    /**
+     * 修改一个用户
+     * @return
+     */
+    boolean updateCliUser(CliUser user);
+
 }
