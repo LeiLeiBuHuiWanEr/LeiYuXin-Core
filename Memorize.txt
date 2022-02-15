@@ -29,6 +29,13 @@ LeiYuXin-Core 项目纪念墙：
 }
 
 2022-01-23 LeiYuXin-Core 第一个发行版0.0.1正式发布！！
-在虎年即将到来之际，将会对此版本进一步优化，在虎年来临的时刻，发布LeiYuXin-Core:Single Application(单服务器版，简称LCSA) v0.1虎年特别版
+v0.0.1
+
+2022-01-31 LeiYuXin-Core v0.1.0 Year of the Tiger Special Edition
+v0.1.0虎年特别版
+
+2022-02-14 LeiYuXin-Core Single Application v0.1.2 BingDwenDwen Special Edition
+v0.1.2冰墩墩特别版
+
 
 LeiYuXin-Core：Microservice （分布式微服务版，简称LCMS） 基于SpringCloud Alibaba，将于2022年5月20日前发行公开版，敬请期待！
