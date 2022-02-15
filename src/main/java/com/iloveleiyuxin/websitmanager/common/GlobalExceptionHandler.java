@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
+import java.util.Objects;
+
 /**
  * 全局异常处理类
  * @author ZhangWanTing's Bestie, LeiYuXin's Boyfriend
@@ -39,6 +41,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = IllegalArgumentException.class)
     public Response handler(IllegalArgumentException e) {
+//        e.printStackTrace();
         log.error("Assert异常：----------------{}", e.getMessage());
         return Response.fail(CodeEnum.BAD_REQUEST,e.getMessage());
     }
@@ -60,7 +63,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     public Response handler(HttpRequestMethodNotSupportedException exception){
-        return Response.fail(CodeEnum.METHOD_NOT_ALLOWED, "HTTP Status : 405 Method Not Allowed when"+ " "+exception.getMethod() + " ,you need to "+ exception.getSupportedMethods()[0]);
+        return Response.fail(CodeEnum.METHOD_NOT_ALLOWED, "HTTP Status : 405 Method Not Allowed when"+ " "+exception.getMethod() + " ,you need to "+ Objects.requireNonNull(exception.getSupportedMethods())[0]);
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

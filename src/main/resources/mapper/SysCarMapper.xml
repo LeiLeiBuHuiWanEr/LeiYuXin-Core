@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iloveleiyuxin.websitmanager.mapper.SysCarMapper">
+    <resultMap id="carVoResultMap" type="com.iloveleiyuxin.websitmanager.vo.CarVo">
+        <id column="id" property="id"/>
+        <result column="carNo" property="carno"/>
+        <result column="carOwner" property="carowner"/>
+        <result column="ownerNo" property="ownerno"/>
+        <result column="carColor" property="carcolor"/>
+        <result column="carBrand" property="carbrand"/>
+        <result column="carState" property="carstate"/>
+        <result column="fee" property="fee"/>
+    </resultMap>
+    <select id="selectOneVo" resultMap="carVoResultMap" parameterType="String">
+        SELECT c.id,c.carNo,u.userName AS carOwner,c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee
+        FROM sys_car c LEFT JOIN cli_user u ON c.carOwner=u.id WHERE c.carNo = #{param1}
+    </select>
+    <select id="selectListVo" resultMap="carVoResultMap">
+        SELECT c.id,c.carNo,u.userName AS carOwner, c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee
+        FROM sys_car c LEFT JOIN cli_user u ON c.carOwner=u.id ${ew.customSqlSegment}
+    </select>
 
 </mapper>

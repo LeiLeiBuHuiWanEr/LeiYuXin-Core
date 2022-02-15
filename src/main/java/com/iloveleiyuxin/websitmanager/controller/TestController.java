@@ -59,4 +59,11 @@ public class TestController extends BaseController{
         return Response.succ(map);
     }
 
+    @GetMapping("test/carVo")
+    public Response selectOneVo(){
+        String number = req.getParameter("number");
+        QueryWrapper queryWrapper = (QueryWrapper) new QueryWrapper().eq("username",number);
+        return Response.succ(sysCarService.selectList(queryWrapper));
+    }
+
 }

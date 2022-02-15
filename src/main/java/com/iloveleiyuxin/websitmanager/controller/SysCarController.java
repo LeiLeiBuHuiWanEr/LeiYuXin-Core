@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.entity.SysCar;
+import com.iloveleiyuxin.websitmanager.vo.CarVo;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +46,8 @@ public class SysCarController extends BaseController {
 
     @GetMapping("info/selectByOwner")
     public Response selectByOwner(){
-        String userNo = req.getParameter("userNo");
-        List<SysCar> list = sysCarService.list(new QueryWrapper<SysCar>().eq("carOwner",userNo));
+        String userNo = req.getParameter("username");
+        List<CarVo> list = sysCarService.selectList(new QueryWrapper<SysCar>().eq("username",userNo));
         if(list.size() == 0){
             return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空");
         }
@@ -54,9 +57,41 @@ public class SysCarController extends BaseController {
     @GetMapping("info/selectByNumber")
     public Response selectByNumber(){
         String userNo = req.getParameter("carNumber");
-        SysCar sysCar = sysCarService.getOne(new QueryWrapper<SysCar>().eq("carNo",userNo));
-        Assert.notNull(sysCar,"没有查询到结果");
-        return Response.succ(sysCar);
+        if (userNo == null || userNo.equals("")){
+            throw new NullPointerException("缺失参数");
+        }
+        CarVo carVo = sysCarService.selectOneVo(userNo);
+        Assert.notNull(carVo,"没有查询到结果");
+        return Response.succ(carVo);
+    }
+
+    @PreAuthorize("hasAuthority('ROLE_999')")
+    @GetMapping("operate/deleteByNumber")
+    public Response delByNumber(){
+        String userNo = req.getParameter("carNumber");
+        if (userNo == null || userNo.equals("")){
+            throw new NullPointerException("缺失参数");
+        }
+        sysCarService.remove(new QueryWrapper<SysCar>().eq("carNo",userNo));
+        return Response.succ("");
+    }
+
+    @GetMapping("operate/change")
+    public Response change(){
+        String number = req.getParameter("carNumber");
+        if (number == null || number.equals("")){
+            throw new NullPointerException("缺失参数");
+        }
+        String brand = req.getParameter("brand");
+        String color = req.getParameter("color");
+        String fee = req.getParameter("fee");
+        String state = req.getParameter("state");
+
+        SysCar sysCar = new SysCar(number,null,color,brand,state == null ? null:Integer.valueOf(state),fee == null ? null: BigDecimal.valueOf(Double.parseDouble(fee)));
+
+        sysCarService.changeCar(sysCar);
+
+        return Response.succ("");
     }
 
 }
