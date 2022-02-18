@@ -1,6 +1,6 @@
 package com.iloveleiyuxin.websitmanager.security;
 
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import java.io.IOException;
 @Component
 public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
 
+    ObjectMapper objectMapper = new ObjectMapper();
     @Autowired
     JwtUtils jwtUtils;
 
@@ -35,7 +36,7 @@ public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
 
         Response resp = Response.succ("");
 
-        outputStream.write(JSONUtil.toJsonStr(resp).getBytes("UTF-8"));
+        outputStream.write(objectMapper.writeValueAsString(resp).getBytes("UTF-8"));
 
         outputStream.flush();
         outputStream.close();

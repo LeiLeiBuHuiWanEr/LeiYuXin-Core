@@ -1,6 +1,6 @@
 package com.iloveleiyuxin.websitmanager.security;
 
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.KaptchaException;
@@ -17,6 +17,7 @@ import java.io.IOException;
 
 @Component
 public class LoginFailureHandler implements AuthenticationFailureHandler {
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
@@ -32,7 +33,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
         }
 
 
-        outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
+        outputStream.write(objectMapper.writeValueAsString(result).getBytes("UTF-8"));
 
         outputStream.flush();
         outputStream.close();
