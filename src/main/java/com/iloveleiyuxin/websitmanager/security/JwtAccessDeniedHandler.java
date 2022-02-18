@@ -1,6 +1,6 @@
 package com.iloveleiyuxin.websitmanager.security;
 
-import cn.hutool.json.JSONUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import org.springframework.security.access.AccessDeniedException;
@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @Component
 public class JwtAccessDeniedHandler implements AccessDeniedHandler {
+    ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
@@ -26,7 +27,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
         Response resp = Response.fail(CodeEnum.FORBIDDEN,accessDeniedException.getMessage());
 
-        outputStream.write(JSONUtil.toJsonStr(resp).getBytes("UTF-8"));
+        outputStream.write(objectMapper.writeValueAsString(resp).getBytes("UTF-8"));
 
         outputStream.flush();
         outputStream.close();
