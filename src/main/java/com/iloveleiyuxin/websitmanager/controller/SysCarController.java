@@ -46,8 +46,8 @@ public class SysCarController extends BaseController {
 
     @GetMapping("info/selectByOwner")
     public Response selectByOwner(){
-        String userNo = req.getParameter("username");
-        List<CarVo> list = sysCarService.selectList(new QueryWrapper<SysCar>().eq("username",userNo));
+        String userName = req.getParameter("username");
+        List<CarVo> list = sysCarService.selectList(new QueryWrapper<SysCar>().eq("username",userName));
         if(list.size() == 0){
             return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空");
         }

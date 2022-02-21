@@ -4,6 +4,7 @@ package com.iloveleiyuxin.websitmanager.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.entity.CliUser;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -63,13 +65,13 @@ public class CliUserController extends BaseController {
             birthday = "2022-01-31";
         }
         if (cliRole == null){
-            cliRole = "2";
+            cliRole = "801";
         }
         if (healthState == null){
             healthState = "0";
         }
         if (quarantineState == null){
-            quarantineState = "1";
+            quarantineState = "0";
         }
         if (permanentResidence == null){
             permanentResidence = "1";
@@ -87,6 +89,44 @@ public class CliUserController extends BaseController {
 
         cliUserService.addCliUser(cliUser);
         return Response.succ(cliUser);
+    }
+
+    @PostMapping("operate/mapInsert")
+    public Response addCliUserByMap(@RequestBody Map<String,Object> filterMap){
+        if(!filterMap.containsKey("username")){
+            return Response.fail(CodeEnum.NEED_PARAM,"缺失必要的参数[userName]");
+        }else if(!filterMap.containsKey("userpassword")){
+            return Response.fail(CodeEnum.NEED_PARAM,"缺失必要的参数[userpassword]");
+        }else if(filterMap.get("sex")==null||(!filterMap.get("sex").equals("男")&&!filterMap.get("sex").equals("女"))){
+            return Response.fail(CodeEnum.NEED_PARAM,"缺失正确参数[sex]");
+        }else if(!filterMap.containsKey("locate")){
+            return Response.fail(CodeEnum.NEED_PARAM,"缺失必要的参数[locate]");
+        }else if(!filterMap.containsKey("phone")){
+            return Response.fail(CodeEnum.NEED_PARAM,"缺失必要的参数[phone]");
+        }
+
+        if(!filterMap.containsKey("nickname")){
+            filterMap.put("nickname",filterMap.get("username"));
+        }
+
+        if(filterMap.get("birthday")!=null){
+            filterMap.put("birthday",LocalDate.parse(filterMap.get("birthday").toString()));
+        }
+
+        filterMap.put("registerdate",LocalDate.now());
+
+        String json;
+        try {
+            json = objectMapper.writeValueAsString(filterMap);
+        } catch (JsonProcessingException e) {
+            return Response.fail(CodeEnum.LEIYUXIN_FALLEN_IN_LOVE,"JSON转换异常");
+        }
+        try {
+            cliUserService.addCliUser(objectMapper.readValue(json,CliUser.class));
+        } catch (JsonProcessingException e) {
+            return Response.fail(CodeEnum.LEIYUXIN_FALLEN_IN_LOVE,"JSON转换异常");
+        }
+        return Response.succ("");
     }
 
     @GetMapping("operate/change")
@@ -172,6 +212,42 @@ public class CliUserController extends BaseController {
         return Response.succ("");
     }
 
+    /**
+     * 疫情部分
+     */
+    @GetMapping("info/select/geli")
+    public Response geLiList(){
+        List<CliUser> resultList = cliUserService.list(new QueryWrapper<CliUser>().notIn("quarantineState",0));
+        if (resultList == null || resultList.size()==0){
+            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"没有查询到结果");
+        }
+        return Response.succ(resultList);
+    }
 
+    @GetMapping("info/select/jiankang")
+    public Response buJianKangList(){
+        List<CliUser> resultList;
+        if(req.getParameter("type").equals("99")){
+            resultList = cliUserService.list(new QueryWrapper<CliUser>().eq("healthState",99));
+        }else{
+            resultList = cliUserService.list(new QueryWrapper<CliUser>().notIn("healthState",0));
+        }
+
+        if (resultList == null || resultList.size()==0){
+            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"没有查询到结果");
+        }
+        return Response.succ(resultList);
+    }
+
+    @GetMapping("operate/resetHealthState")
+    public Response resetHealthState(){
+        String id = req.getParameter("id");
+        Assert.notNull(id,"缺失参数");
+        CliUser user = cliUserService.getById(id);
+        Assert.notNull(user,"查无此人");
+        user.setHealthstate(0);
+        cliUserService.updateById(user);
+        return Response.succ("");
+    }
 
 }

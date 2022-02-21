@@ -1,5 +1,6 @@
 package com.iloveleiyuxin.websitmanager.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.iloveleiyuxin.websitmanager.service.*;
 import com.iloveleiyuxin.websitmanager.utils.JwtUtils;
 import com.iloveleiyuxin.websitmanager.utils.RedisUtils;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.format.DateTimeFormatter;
 
 public class BaseController {
@@ -14,6 +16,9 @@ public class BaseController {
 
     @Autowired
     HttpServletRequest req;
+
+    @Autowired
+    HttpServletResponse resp;
 
     @Autowired
     RedisUtils redisUtil;
@@ -44,5 +49,8 @@ public class BaseController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+    ObjectMapper objectMapper;
 
 }
