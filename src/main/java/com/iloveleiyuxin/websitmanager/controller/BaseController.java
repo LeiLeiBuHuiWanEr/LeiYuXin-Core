@@ -1,5 +1,7 @@
 package com.iloveleiyuxin.websitmanager.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.iloveleiyuxin.websitmanager.httpClient.HttpApi;
 import com.iloveleiyuxin.websitmanager.service.ISysRoleService;
 import com.iloveleiyuxin.websitmanager.service.ISysUserService;
 import com.iloveleiyuxin.websitmanager.utils.JwtUtils;
@@ -30,4 +32,10 @@ public class BaseController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+    HttpApi http;
+
+    @Autowired
+    ObjectMapper objectMapper;
 }

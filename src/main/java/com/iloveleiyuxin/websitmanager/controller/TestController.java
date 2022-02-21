@@ -1,6 +1,7 @@
 package com.iloveleiyuxin.websitmanager.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.entity.SysUser;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class TestController extends BaseController{
@@ -50,6 +53,28 @@ public class TestController extends BaseController{
         System.out.println("匹配结果：" + matches);
 
         return Response.succ(password);
+    }
+
+    @GetMapping("test/httpApi")
+    public Response HttpApiTest() throws Exception{
+        String weatherApiUrl = "https://www.yiketianqi.com/free/day?appid=35413257&appsecret=PaGV6Xzu&unescape=1&city=";
+        String city = req.getParameter("city");
+        if (city == null || city.equals("")){
+            city = "唐山";
+        }
+        String s = null;
+        try {
+            s = http.doGet(weatherApiUrl+city);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<String,String> result = null;
+        try {
+            result = objectMapper.readValue(s, HashMap.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return Response.succ(result);
     }
 
 }

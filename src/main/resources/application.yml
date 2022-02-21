@@ -4,7 +4,7 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://192.168.1.110:3306/iloveleiyuxinManagementDB?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://192.168.1.111:3306/iloveleiyuxinManagementDB?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       password: LYX5201314
@@ -24,6 +24,18 @@ spring:
 #      password: LYX5201314
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**Mapper.xml
+http:
+  #最大连接数
+  maxTotal: 100
+  defaultMaxPerRoute: 20
+  #连接超时时间
+  connectTimeout: 1000
+  #从连接池中获取到连接的最长时间
+  connectionRequestTimeout: 500
+  #数据传输的最长时间
+  socketTimeout: 10000
+  #提交请求前测试连接是否可用
+  staleConnectionCheckEnabled: true
 com:
   iloveleiyuxin:
     websitmanager:
