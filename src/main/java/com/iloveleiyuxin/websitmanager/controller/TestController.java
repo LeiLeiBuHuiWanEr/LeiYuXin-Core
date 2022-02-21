@@ -9,11 +9,11 @@ import com.iloveleiyuxin.websitmanager.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class TestController extends BaseController{
@@ -28,7 +28,7 @@ public class TestController extends BaseController{
 
     @GetMapping("/test/t")
     public Response test() {
-        return Response.succ(sysHouseService.updateHouse("10101101",82.2,2.50,"我爱雷雨鑫"));
+        return Response.succ(sysUserService.getByUserId(2));
     }
 
     @GetMapping("test/redis")
@@ -52,18 +52,26 @@ public class TestController extends BaseController{
         return Response.succ(password);
     }
 
-    @PostMapping("test/map")
-    public Response mapTest(@RequestBody Map map){
-        String s = req.getParameter("userName");
-        System.out.println(s);
-        return Response.succ(map);
-    }
-
-    @GetMapping("test/carVo")
-    public Response selectOneVo(){
-        String number = req.getParameter("number");
-        QueryWrapper queryWrapper = (QueryWrapper) new QueryWrapper().eq("username",number);
-        return Response.succ(sysCarService.selectList(queryWrapper));
+    @GetMapping("test/httpApi")
+    public Response HttpApiTest() throws Exception{
+        String weatherApiUrl = "https://www.yiketianqi.com/free/day?appid=35413257&appsecret=PaGV6Xzu&unescape=1&city=";
+        String city = req.getParameter("city");
+        if (city == null || city.equals("")){
+            city = "唐山";
+        }
+        String s = null;
+        try {
+            s = http.doGet(weatherApiUrl+city);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Map<String,String> result = null;
+        try {
+            result = objectMapper.readValue(s, HashMap.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        return Response.succ(result);
     }
 
 }
