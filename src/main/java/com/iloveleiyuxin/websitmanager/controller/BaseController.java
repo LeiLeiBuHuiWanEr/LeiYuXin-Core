@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.time.format.DateTimeFormatter;
 
 public class BaseController {
@@ -56,10 +57,6 @@ public class BaseController {
     @Autowired
     ObjectMapper objectMapper;
 
-
     @Autowired
     HttpApi http;
-
-    @Autowired
-    ObjectMapper objectMapper;
 }
