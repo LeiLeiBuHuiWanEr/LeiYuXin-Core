@@ -8,6 +8,6 @@ package com.iloveleiyuxin.websitmanager.common;
  */
 public class Const {
 
-    public final static String LEIYUXIN_CORE_VERSION = "0.1.2 BingDwenDwen~ So Cutie~";
+    public final static String LEIYUXIN_CORE_VERSION = "0.1.3 BingDwenDwen~ So Cutie~";
     public final static String KAPTCHA_KEY = "kaptcha";
 }
