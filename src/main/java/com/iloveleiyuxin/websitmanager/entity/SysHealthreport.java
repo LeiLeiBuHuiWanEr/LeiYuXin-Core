@@ -3,6 +3,7 @@ package com.iloveleiyuxin.websitmanager.entity;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.iloveleiyuxin.websitmanager.entity.BaseEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -16,6 +17,7 @@ import lombok.EqualsAndHashCode;
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
 public class SysHealthreport extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
