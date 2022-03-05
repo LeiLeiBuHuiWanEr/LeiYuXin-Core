@@ -59,4 +59,7 @@ public class BaseController {
 
     @Autowired
     HttpApi http;
+
+    @Autowired
+    ISysHealthreportService sysHealthreportService;
 }

@@ -40,6 +40,9 @@ public class SysHealthreportServiceImpl extends ServiceImpl<SysHealthreportMappe
             }
             throw new IllegalArgumentException("核酸结果仅能为阴性或者阳性，或者填入未检测");
         }
-        return false;
+
+        sysHealthreportMapper.insert(sysHealthreport);
+        log.info("结束事务");
+        return true;
     }
 }

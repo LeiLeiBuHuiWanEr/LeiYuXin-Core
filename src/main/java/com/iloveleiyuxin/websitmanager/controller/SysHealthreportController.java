@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
-import com.iloveleiyuxin.websitmanager.controller.BaseController;
 
 import java.time.LocalDateTime;
 
@@ -24,6 +23,7 @@ import java.time.LocalDateTime;
 @RequestMapping("/sys-healthreport")
 public class SysHealthreportController extends BaseController {
 
+    //新增一条健康报告数据
     @GetMapping("operate/newReport")
     public Response newReport(){
         String userId = req.getParameter("userId");
@@ -39,7 +39,7 @@ public class SysHealthreportController extends BaseController {
         SysHealthreport sysHealthreport = new SysHealthreport
                 (Integer.parseInt(userId),description, LocalDateTime.now(),bodyTemperature,rnaTest,needQuantine);
 
-
+        sysHealthreportService.newReport(sysHealthreport);
         return Response.succ("");
     }
 
