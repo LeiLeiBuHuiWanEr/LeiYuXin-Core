@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
+import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.common.exception.LeiYuXinFallenInLoveException;
 import com.iloveleiyuxin.websitmanager.entity.SysUser;
 import io.jsonwebtoken.Jwts;
@@ -135,7 +136,7 @@ public class SysUserController extends BaseController {
         String passwordNew = req.getParameter("newPassword");
         String passwordOld = req.getParameter("oldPassword");
         if(null == passwordNew || passwordNew.equals("")){
-            return Response.fail(CodeEnum.NEED_PARAM,"缺少参数");
+            throw new LackParamException("缺失参数newPassword");
         }
         String token = req.getHeader("Authorization");
         String user = Jwts.parser()

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
+import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysHouse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -69,7 +70,7 @@ public class SysHouseController extends BaseController {
         Double feeD;
 
         if(buildingNo == null || unitNo == null || houseNo == null){
-            return Response.fail(CodeEnum.NEED_PARAM,"缺失参数");
+            throw new LackParamException("缺失参数");
         }
 
         try{
@@ -99,7 +100,7 @@ public class SysHouseController extends BaseController {
         String houseNo = req.getParameter("houseNo");
 
         if(buildingNo == null){
-            return Response.fail(CodeEnum.NEED_PARAM,"缺失参数");
+            throw new LackParamException("缺失参数buildingNo");
         }
 
         Map<String,Object> filterMap = new HashMap<>();

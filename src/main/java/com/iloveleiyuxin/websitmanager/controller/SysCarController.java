@@ -4,6 +4,7 @@ package com.iloveleiyuxin.websitmanager.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
+import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysCar;
 import com.iloveleiyuxin.websitmanager.vo.CarVo;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -58,7 +59,7 @@ public class SysCarController extends BaseController {
     public Response selectByNumber(){
         String userNo = req.getParameter("carNumber");
         if (userNo == null || userNo.equals("")){
-            throw new NullPointerException("缺失参数");
+            throw new LackParamException("缺失参数carNumber");
         }
         CarVo carVo = sysCarService.selectOneVo(userNo);
         Assert.notNull(carVo,"没有查询到结果");
@@ -70,7 +71,7 @@ public class SysCarController extends BaseController {
     public Response delByNumber(){
         String userNo = req.getParameter("carNumber");
         if (userNo == null || userNo.equals("")){
-            throw new NullPointerException("缺失参数");
+            throw new LackParamException("缺失参数carNumber");
         }
         sysCarService.remove(new QueryWrapper<SysCar>().eq("carNo",userNo));
         return Response.succ("");
@@ -80,7 +81,7 @@ public class SysCarController extends BaseController {
     public Response change(){
         String number = req.getParameter("carNumber");
         if (number == null || number.equals("")){
-            throw new NullPointerException("缺失参数");
+            throw new LackParamException("缺失参数carNumber");
         }
         String brand = req.getParameter("brand");
         String color = req.getParameter("color");

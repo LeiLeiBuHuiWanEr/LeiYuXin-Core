@@ -4,6 +4,7 @@ package com.iloveleiyuxin.websitmanager.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.iloveleiyuxin.websitmanager.common.Const;
 import com.iloveleiyuxin.websitmanager.common.Response;
+import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -72,7 +73,7 @@ public class SysHealthreportController extends BaseController {
 
         String id = req.getParameter("id");
         if(id==null|| id.equals("")){
-            throw new NullPointerException("缺失参数");
+            throw new LackParamException("缺失参数id");
         }
 
         QueryWrapper<SysHealthreport> queryWrapper = new QueryWrapper<>();
@@ -105,6 +106,9 @@ public class SysHealthreportController extends BaseController {
             startdate = simpleDateFormat.format(now.getTime());
         }else if(timeflag.equals("1")){
             String startObj = req.getParameter("startdate");
+            if(startObj == null){
+                throw new LackParamException("缺失参数startDate");
+            }
             Date stareD = simpleDateFormat.parse(startObj);
             now.setTime(stareD);
             startdate = simpleDateFormat.format(now.getTime());
@@ -112,17 +116,27 @@ public class SysHealthreportController extends BaseController {
             String startObj = req.getParameter("startdate");
             String endObj = req.getParameter("enddate");
             if(startObj==null || endObj == null){
-                throw new NullPointerException("缺失参数");
+                throw new LackParamException("缺失参数startdate或enddate");
             }
             Date stareD = simpleDateFormat.parse(startObj);
             Date endD = endDateformat.parse(endObj);
             now.setTime(stareD);
             startdate = simpleDateFormat.format(now.getTime());
+            now.setTime(endD);
+            enddate = simpleDateFormat.format(now.getTime());
         }else {
-
+            now.set(Calendar.HOUR_OF_DAY, -24);
+            startdate = simpleDateFormat.format(now.getTime());
         }
 
-        return Response.succ("");
+        QueryWrapper<SysHealthreport> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().ge(SysHealthreport::getReportdate,startdate)
+                .le(SysHealthreport::getReportdate,enddate);
+
+        List<SysHealthreport> list = sysHealthreportService.list
+                (queryWrapper);
+
+        return Response.succ(list);
     }
 
 }

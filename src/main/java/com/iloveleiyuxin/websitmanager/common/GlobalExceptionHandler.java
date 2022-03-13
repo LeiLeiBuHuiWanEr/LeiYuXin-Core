@@ -48,14 +48,11 @@ public class GlobalExceptionHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(value = RuntimeException.class)
-    public Response handler(LackParamException e) {
-        log.error("缺失参数异常！！！");
-        return Response.fail(CodeEnum.NEED_PARAM,e.getMessage());
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(value = RuntimeException.class)
     public Response handler(RuntimeException e) {
+        if(e instanceof LackParamException){
+            log.error("缺失参数异常！！！");
+            return Response.fail(CodeEnum.NEED_PARAM,e.getMessage());
+        }
         log.error("运行时异常：----------------{}", e);
         return Response.fail(CodeEnum.BAD_REQUEST,e.getMessage());
     }
