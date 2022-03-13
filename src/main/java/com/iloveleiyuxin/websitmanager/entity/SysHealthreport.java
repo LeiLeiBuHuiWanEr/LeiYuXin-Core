@@ -41,10 +41,19 @@ public class SysHealthreport extends BaseEntity {
     private String rnatest;
     /**
      * 是否需要隔离?
-     * 0不需要，1需要
+     * 0不需要，其余代表需要隔离天数
      */
     @TableField("needQuarantine")
     private Integer needquarantine;
 
 
+    public SysHealthreport(Integer id,Integer healthuser, String healthdescription, LocalDateTime reportdate, Double bodytemperature, String rnatest, Integer needquarantine) {
+        this.setId(id);
+        this.healthuser = healthuser;
+        this.healthdescription = healthdescription;
+        this.reportdate = reportdate;
+        this.bodytemperature = bodytemperature;
+        this.rnatest = rnatest;
+        this.needquarantine = needquarantine;
+    }
 }
