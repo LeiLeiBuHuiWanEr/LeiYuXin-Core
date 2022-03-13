@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = RuntimeException.class)
     public Response handler(LackParamException e) {
         log.error("缺失参数异常！！！");
-        return Response.fail(CodeEnum.BAD_REQUEST,e.getMessage());
+        return Response.fail(CodeEnum.NEED_PARAM,e.getMessage());
     }
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
