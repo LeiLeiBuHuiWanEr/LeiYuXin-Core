@@ -1,5 +1,6 @@
 package com.iloveleiyuxin.websitmanager.common;
 
+import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
@@ -42,6 +43,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = IllegalArgumentException.class)
     public Response handler(IllegalArgumentException e) {
         log.error("Assert异常：----------------{}", e.getMessage());
+        return Response.fail(CodeEnum.BAD_REQUEST,e.getMessage());
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(value = RuntimeException.class)
+    public Response handler(LackParamException e) {
+        log.error("缺失参数异常！！！");
         return Response.fail(CodeEnum.BAD_REQUEST,e.getMessage());
     }
 
