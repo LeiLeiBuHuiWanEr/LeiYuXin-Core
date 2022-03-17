@@ -7,17 +7,17 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
+import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.CliUser;
+import com.iloveleiyuxin.websitmanager.entity.SysGeli;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -215,6 +215,10 @@ public class CliUserController extends BaseController {
     /**
      * 疫情部分
      */
+    /**
+     * 查询当前隔离者列表
+     * @return
+     */
     @GetMapping("info/select/geli")
     public Response geLiList(){
         List<CliUser> resultList = cliUserService.list(new QueryWrapper<CliUser>().notIn("quarantineState",0));
@@ -222,6 +226,17 @@ public class CliUserController extends BaseController {
             return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"没有查询到结果");
         }
         return Response.succ(resultList);
+    }
+
+    @GetMapping("info/geliById")
+    public Response geliById(){
+        String id = req.getParameter("id");
+        if(id == null){
+            throw new LackParamException("缺失参数id");
+        }
+        boolean state = sysGeliService.isGeli(Integer.parseInt(id));
+
+        return Response.succ(state);
     }
 
     @GetMapping("info/select/jiankang")

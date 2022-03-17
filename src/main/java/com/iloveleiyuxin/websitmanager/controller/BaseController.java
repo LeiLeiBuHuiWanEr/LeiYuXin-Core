@@ -62,4 +62,10 @@ public class BaseController {
 
     @Autowired
     ISysHealthreportService sysHealthreportService;
+
+    @Autowired
+    ISysGeliService sysGeliService;
+
+    @Autowired
+    ISysRegionService sysRegionService;
 }
