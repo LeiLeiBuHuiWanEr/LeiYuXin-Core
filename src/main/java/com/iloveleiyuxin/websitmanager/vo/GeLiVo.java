@@ -1,29 +1,15 @@
-package com.iloveleiyuxin.websitmanager.entity;
+package com.iloveleiyuxin.websitmanager.vo;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 
 import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.iloveleiyuxin.websitmanager.entity.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
 
-/**
- * <p>
- * 
- * </p>
- *
- * @author LeiYuXin's Boyfriend
- * @since 2022-03-16
- */
-@Data
-@EqualsAndHashCode(callSuper = true)
-@AllArgsConstructor
-public class SysGeli extends BaseEntity {
-
-    private static final long serialVersionUID = 1L;
-
+public class GeLiVo {
     @TableField("geliUser")
     private Integer geliuser;
+
+    @TableField("userName")
+    private String username;
 
     @TableField("geliDescription")
     private String gelidescription;
@@ -56,6 +42,5 @@ public class SysGeli extends BaseEntity {
      * 返回位置
      */
     @TableField("lastPlace")
-    private Integer lastplace;
-
+    private String lastplace;
 }

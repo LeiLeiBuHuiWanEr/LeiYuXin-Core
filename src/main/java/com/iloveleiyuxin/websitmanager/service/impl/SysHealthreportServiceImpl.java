@@ -1,16 +1,20 @@
 package com.iloveleiyuxin.websitmanager.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.iloveleiyuxin.websitmanager.entity.CliUser;
 import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
 import com.iloveleiyuxin.websitmanager.mapper.CliUserMapper;
 import com.iloveleiyuxin.websitmanager.mapper.SysHealthreportMapper;
 import com.iloveleiyuxin.websitmanager.service.ISysHealthreportService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import java.util.List;
 
 /**
  * <p>
@@ -46,5 +50,10 @@ public class SysHealthreportServiceImpl extends ServiceImpl<SysHealthreportMappe
         sysHealthreportMapper.insert(sysHealthreport);
         log.info("结束事务");
         return true;
+    }
+
+    @Override
+    public List<HealthReportVo> selectVo(QueryWrapper<SysHealthreport> queryWrapper) {
+        return sysHealthreportMapper.selectVo(queryWrapper);
     }
 }

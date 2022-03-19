@@ -1,7 +1,11 @@
 package com.iloveleiyuxin.websitmanager.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +18,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 public interface ISysHealthreportService extends IService<SysHealthreport> {
 
     boolean newReport(SysHealthreport sysHealthreport);
+
+    List<HealthReportVo> selectVo(QueryWrapper<SysHealthreport> queryWrapper);
 
 }

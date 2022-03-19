@@ -20,10 +20,10 @@ public class HealthReportVo implements Serializable {
     private Integer id;
 
     @TableField("healthUser")
-    private Integer healthuser;
+    private Integer userid;
 
     @TableField("userName")
-    private String userName;
+    private String username;
 
     @TableField("healthDescription")
     private String healthdescription;

@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iloveleiyuxin.websitmanager.mapper.SysHealthreportMapper">
+    <resultMap id="healthVoResultMap" type="com.iloveleiyuxin.websitmanager.vo.HealthReportVo">
+        <id column="id" property="id"/>
+        <result column="healthUser" property="userid"/>
+        <result column="userName" property="username"/>
+        <result column="healthDescription" property="healthdescription"/>
+        <result column="reportDate" property="reportdate"/>
+        <result column="bodyTemperature" property="bodytemperature"/>
+        <result column="rnaTest" property="rnatest"/>
+        <result column="needQuarantine" property="needquarantine"/>
+    </resultMap>
+
+    <select id="selectVo" resultMap="healthVoResultMap">
+        SELECT hr.id,hr.healthUser,u.userName,hr.healthDescription,hr.reportDate,hr.bodyTemperature,hr.rnaTest,hr.needQuarantine
+        FROM sys_healthreport hr LEFT JOIN sys_user u ON hr.healthuser=u.id
+            ${ew.customSqlSegment}
+    </select>
 
 </mapper>

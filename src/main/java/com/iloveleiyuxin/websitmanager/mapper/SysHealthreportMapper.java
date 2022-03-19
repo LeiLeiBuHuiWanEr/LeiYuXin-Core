@@ -1,8 +1,14 @@
 package com.iloveleiyuxin.websitmanager.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,5 +20,5 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface SysHealthreportMapper extends BaseMapper<SysHealthreport> {
-
+    List<HealthReportVo> selectVo(@Param(Constants.WRAPPER) QueryWrapper<SysHealthreport> wrapper);
 }

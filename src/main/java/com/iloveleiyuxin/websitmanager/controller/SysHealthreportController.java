@@ -6,6 +6,7 @@ import com.iloveleiyuxin.websitmanager.common.Const;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
+import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -81,7 +82,7 @@ public class SysHealthreportController extends BaseController {
                 .ge(SysHealthreport::getReportdate,startdate).le(SysHealthreport::getReportdate,enddate);
 
 
-        List<SysHealthreport> list = sysHealthreportService.list
+        List<HealthReportVo> list = sysHealthreportService.selectVo
                 (queryWrapper);
 
         return Response.succ(list);
@@ -133,7 +134,7 @@ public class SysHealthreportController extends BaseController {
         queryWrapper.lambda().ge(SysHealthreport::getReportdate,startdate)
                 .le(SysHealthreport::getReportdate,enddate);
 
-        List<SysHealthreport> list = sysHealthreportService.list
+        List<HealthReportVo> list = sysHealthreportService.selectVo
                 (queryWrapper);
 
         return Response.succ(list);
