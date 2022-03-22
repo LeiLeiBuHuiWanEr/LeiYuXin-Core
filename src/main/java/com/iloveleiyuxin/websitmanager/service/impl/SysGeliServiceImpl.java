@@ -5,6 +5,7 @@ import com.iloveleiyuxin.websitmanager.entity.SysGeli;
 import com.iloveleiyuxin.websitmanager.mapper.SysGeliMapper;
 import com.iloveleiyuxin.websitmanager.service.ISysGeliService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.iloveleiyuxin.websitmanager.vo.GeLiVo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +50,10 @@ public class SysGeliServiceImpl extends ServiceImpl<SysGeliMapper, SysGeli> impl
         }
         log.info("结束事务");
         return state;
+    }
+
+    @Override
+    public List<GeLiVo> selectVo(QueryWrapper<SysGeli> queryWrapper) {
+        return sysGeliMapper.selectVo(queryWrapper);
     }
 }

@@ -7,6 +7,7 @@ import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysGeli;
+import com.iloveleiyuxin.websitmanager.vo.GeLiVo;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.iloveleiyuxin.websitmanager.controller.BaseController;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -98,10 +100,14 @@ public class SysGeliController extends BaseController {
     @GetMapping("info/selectByUser")
     public Response selectById(){
         String id = req.getParameter("id");
+        if(id==null){
+            throw new LackParamException("缺失参数id");
+        }
         QueryWrapper<SysGeli> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(SysGeli::getGeliuser,id);
 
-
-        return Response.succ("");
+        List<GeLiVo> result = sysGeliService.selectVo(queryWrapper);
+        return Response.succ(result);
     }
 
 }

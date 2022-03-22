@@ -1,9 +1,15 @@
 package com.iloveleiyuxin.websitmanager.vo;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class GeLiVo {
     @TableField("geliUser")
     private Integer geliuser;
