@@ -30,7 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String jwt = jwtUtils.generateToken(authentication.getName());
         response.setHeader(jwtUtils.getHeader(), jwt);
 
-        Response result = Response.succ("");
+        Response result = Response.succ(authentication.getDetails());
 
         outputStream.write(objectMapper.writeValueAsString(result).getBytes("UTF-8"));
 
