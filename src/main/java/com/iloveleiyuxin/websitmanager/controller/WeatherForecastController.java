@@ -19,6 +19,7 @@ public class WeatherForecastController extends BaseController{
         if (city == null || city.equals("")){
             city = "唐山";
         }
+        System.out.println("加载了"+city+"的天气");
         String s = null;
         try {
             s = http.doGet(weatherApiUrl+city);
