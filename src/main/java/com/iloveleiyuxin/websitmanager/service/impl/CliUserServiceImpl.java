@@ -56,8 +56,10 @@ public class CliUserServiceImpl extends ServiceImpl<CliUserMapper, CliUser> impl
         return true;
     }
 
+    //TODO 这里还涉及到人数的变化，需要加进去事务
     @Override
     public boolean updateCliUser(CliUser user) {
-        return false;
+        cliUserMapper.updateById(user);
+        return true;
     }
 }

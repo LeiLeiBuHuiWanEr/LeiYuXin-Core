@@ -129,16 +129,84 @@ public class CliUserController extends BaseController {
         return Response.succ("");
     }
 
+    @PostMapping("operate/mapChange")
+    public Response mapChange(@RequestBody(required = true)Map<String,String> filterMap){
+        String id = filterMap.get("id");
+        CliUser currentUser = cliUserService.getById(id);
+        Assert.notNull(currentUser,"查无此人！");
+        String userName = filterMap.get("username");
+        if (userName != null && !userName.equals("")){
+            currentUser.setUsername(userName);
+        }
+        String pwd = filterMap.get("password");
+        if (pwd != null && !pwd.equals("")){
+            currentUser.setUserpassword(bCryptPasswordEncoder.encode(pwd));
+        }
+        String nickName = filterMap.get("nickname");
+        if (nickName != null && !nickName.equals("")){
+            currentUser.setNickname(nickName);
+        }
+        String sex = filterMap.get("sex");
+        if (sex != null && !sex.equals("")){
+            if (sex.equals("男")||sex.equals("女")){
+                currentUser.setSex(sex);
+            }else throw new IllegalArgumentException("性别只能是男或者女！");
+        }
+        String birthday = filterMap.get("birthday");
+        if (birthday != null && !birthday.equals("")){
+            try {
+                currentUser.setBirthday(LocalDate.parse(birthday));
+            }catch (DateTimeParseException e){
+                throw new IllegalArgumentException("日期格式不正确！");
+            }
+        }
+        String phone = filterMap.get("phone");
+        if (phone != null && !phone.equals("")){
+            currentUser.setPhone(phone);
+        }
+        String cliRole = filterMap.get("role");
+        if (cliRole != null && !cliRole.equals("")){
+            currentUser.setClirole(Integer.parseInt(cliRole));
+        }
+        String locate = filterMap.get("locate");
+        if (locate != null && !locate.equals("")){
+            currentUser.setLocate(Integer.parseInt(locate));
+        }
+        String healthState = filterMap.get("healthstate");
+        if (healthState != null && !healthState.equals("")){
+            currentUser.setHealthstate(Integer.parseInt(healthState));
+        }
+        String quarantineState = filterMap.get("quarantinestate");
+        if (quarantineState != null && !quarantineState.equals("")){
+            currentUser.setQuarantinestate(Integer.parseInt(quarantineState));
+        }
+        String permanentResidence = filterMap.get("permanentresidence");
+        if (permanentResidence != null && !permanentResidence.equals("")){
+            currentUser.setPermanentresidence(Integer.parseInt(permanentResidence));
+        }
+        String lowIncome = filterMap.get("lowincome");
+        if (lowIncome != null && !lowIncome.equals("")){
+            currentUser.setLowincome(Integer.parseInt(lowIncome));
+        }
+        cliUserService.updateCliUser(currentUser);
+        return Response.succ(currentUser);
+    }
+
+    @Deprecated
     @GetMapping("operate/change")
     public Response changeCliUser(){
         String id = req.getParameter("id");
         CliUser currentUser = cliUserService.getById(id);
         Assert.notNull(currentUser,"查无此人！");
-        String userName = req.getParameter("userName");
+        String userName = req.getParameter("username");
         if (userName != null && !userName.equals("")){
             currentUser.setUsername(userName);
         }
-        String nickName = req.getParameter("nickName");
+        String pwd = req.getParameter("password");
+        if (pwd != null && !pwd.equals("")){
+            currentUser.setUserpassword(bCryptPasswordEncoder.encode(pwd));
+        }
+        String nickName = req.getParameter("nickname");
         if (nickName != null && !nickName.equals("")){
             currentUser.setNickname(nickName);
         }
@@ -168,22 +236,23 @@ public class CliUserController extends BaseController {
         if (locate != null && !locate.equals("")){
             currentUser.setLocate(Integer.parseInt(locate));
         }
-        String healthState = req.getParameter("healthState");
+        String healthState = req.getParameter("healthstate");
         if (healthState != null && !healthState.equals("")){
             currentUser.setLocate(Integer.parseInt(healthState));
         }
-        String quarantineState = req.getParameter("quarantineState");
+        String quarantineState = req.getParameter("quarantinestate");
         if (quarantineState != null && !quarantineState.equals("")){
             currentUser.setLocate(Integer.parseInt(quarantineState));
         }
-        String permanentResidence = req.getParameter("permanentResidence");
+        String permanentResidence = req.getParameter("permanentresidence");
         if (permanentResidence != null && !permanentResidence.equals("")){
             currentUser.setLocate(Integer.parseInt(permanentResidence));
         }
-        String lowIncome = req.getParameter("lowIncome");
+        String lowIncome = req.getParameter("lowincome");
         if (lowIncome != null && !lowIncome.equals("")){
             currentUser.setLocate(Integer.parseInt(lowIncome));
         }
+        System.out.println(currentUser.getLocate());
         cliUserService.updateCliUser(currentUser);
         return Response.succ(currentUser);
     }
@@ -195,8 +264,14 @@ public class CliUserController extends BaseController {
         return Response.succ(cliUser);
     }
 
-    @GetMapping("info/select/map")
-    public Response select(@RequestBody Map filterMap){
+    @GetMapping("info/selectAll")
+    public Response selectAll(){
+        List<CliUser> list = cliUserService.list();
+        return Response.succ(list);
+    }
+
+    @PostMapping("info/select/map")
+    public Response select(@RequestBody(required = false) Map filterMap){
         List<CliUser> list = cliUserService.listByMap(filterMap);
         if (list.size() == 0){
             return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"没有查询到结果");
