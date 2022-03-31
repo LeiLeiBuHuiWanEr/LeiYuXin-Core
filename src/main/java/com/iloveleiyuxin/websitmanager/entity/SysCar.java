@@ -6,6 +6,7 @@ import com.iloveleiyuxin.websitmanager.entity.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -16,6 +17,7 @@ import lombok.EqualsAndHashCode;
  * @since 2022-02-03
  */
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 public class SysCar extends BaseEntity {
@@ -57,8 +59,11 @@ public class SysCar extends BaseEntity {
      */
     private BigDecimal fee;
 
+    @TableField("carTypeColor")
+    private String cartypecolor;
 
-    public SysCar(Integer id,String carno, Integer carowner, String carcolor, String carbrand, Integer carstate, BigDecimal fee) {
+
+    public SysCar(Integer id,String carno, Integer carowner, String carcolor, String carbrand, Integer carstate, BigDecimal fee,String cartypecolor) {
         this.setId(id);
         this.carno = carno;
         this.carowner = carowner;
@@ -66,6 +71,7 @@ public class SysCar extends BaseEntity {
         this.carbrand = carbrand;
         this.carstate = carstate;
         this.fee = fee;
+        this.cartypecolor = cartypecolor;
     }
 
 }

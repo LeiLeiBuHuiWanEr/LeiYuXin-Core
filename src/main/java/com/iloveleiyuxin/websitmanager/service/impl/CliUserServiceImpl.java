@@ -48,18 +48,22 @@ public class CliUserServiceImpl extends ServiceImpl<CliUserMapper, CliUser> impl
         if (location.getState() == 0){
             location.setState(1);
         }
-        SysBuilding locateBuilding = sysBuildingMapper.selectById(location.getBuilding());
-        locateBuilding.setPeoplecounts(locateBuilding.getPeoplecounts() + 1);
-        sysBuildingMapper.update(locateBuilding,new QueryWrapper<SysBuilding>().eq("id",location.getBuilding()));
         sysHouseMapper.update(location,new QueryWrapper<SysHouse>().eq("id",user.getLocate()));
         log.info("结束事务");
         return true;
     }
 
-    //TODO 这里还涉及到人数的变化，需要加进去事务
     @Override
+    @Transactional
     public boolean updateCliUser(CliUser user) {
+        log.info("开始事务");
+        Integer houseId = user.getLocate();
+        SysHouse sysHouse = sysHouseMapper.selectById(houseId);
+        if(sysHouse == null){
+            throw new NullPointerException("数据库没有当前房屋信息");
+        }
         cliUserMapper.updateById(user);
+        log.info("结束事务");
         return true;
     }
 }

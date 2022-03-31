@@ -58,4 +58,9 @@ public class CarVo {
      * 车辆管理费用基数
      */
     private BigDecimal fee;
+
+    /**
+     * 车牌颜色
+     */
+    private String cartypecolor;
 }

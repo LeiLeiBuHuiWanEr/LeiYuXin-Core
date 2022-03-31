@@ -35,6 +35,7 @@ public class CliUserController extends BaseController {
         String userName = req.getParameter("userName");
         String nickName = req.getParameter("nickName");
         String password = req.getParameter("password");
+        String avatar = req.getParameter("avatar");
         String sex = req.getParameter("sex");
         String birthday = req.getParameter("birthday");
         String phone = req.getParameter("phone");
@@ -83,7 +84,7 @@ public class CliUserController extends BaseController {
         password = bCryptPasswordEncoder.encode(password);
 
         CliUser cliUser = new CliUser(
-                userName,nickName,password,sex,LocalDate.parse(birthday),phone,Integer.valueOf(cliRole),Integer.valueOf(locate),Integer.valueOf(healthState),
+                userName,nickName,avatar,password,sex,LocalDate.parse(birthday),phone,Integer.valueOf(cliRole),Integer.valueOf(locate),Integer.valueOf(healthState),
                 Integer.valueOf(quarantineState),Integer.valueOf(permanentResidence),Integer.valueOf(lowIncome),LocalDate.now()
                 );
 
@@ -141,6 +142,10 @@ public class CliUserController extends BaseController {
         String pwd = filterMap.get("password");
         if (pwd != null && !pwd.equals("")){
             currentUser.setUserpassword(bCryptPasswordEncoder.encode(pwd));
+        }
+        String avt = filterMap.get("avatar");
+        if (avt != null && !avt.equals("")){
+            currentUser.setAvatar(avt);
         }
         String nickName = filterMap.get("nickname");
         if (nickName != null && !nickName.equals("")){

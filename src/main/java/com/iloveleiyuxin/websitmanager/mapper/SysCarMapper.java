@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -31,4 +32,9 @@ public interface SysCarMapper extends BaseMapper<SysCar> {
      * 根据姓名查一组
      */
     List<CarVo> selectListVo(@Param(Constants.WRAPPER) QueryWrapper wrapper);
+
+    /**
+     * Map传参查一组
+     */
+    List<CarVo> selectMapVo(@Param("filterMap") Map<String,String> filterMap);
 }

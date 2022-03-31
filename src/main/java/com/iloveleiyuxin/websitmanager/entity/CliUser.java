@@ -30,6 +30,8 @@ public class CliUser extends BaseEntity {
     @TableField("nickName")
     private String nickname;
 
+    private String avatar;
+
     @TableField("userPassword")
     private String userpassword;
 

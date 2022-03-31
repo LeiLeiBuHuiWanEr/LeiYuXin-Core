@@ -10,14 +10,43 @@
         <result column="carBrand" property="carbrand"/>
         <result column="carState" property="carstate"/>
         <result column="fee" property="fee"/>
+        <result column="carTypeColor" property="cartypecolor"/>
     </resultMap>
     <select id="selectOneVo" resultMap="carVoResultMap" parameterType="String">
-        SELECT c.id,c.carNo,u.userName AS carOwner,c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee
+        SELECT c.id,c.carNo,u.userName AS carOwner,c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee,c.carTypeColor
         FROM sys_car c LEFT JOIN cli_user u ON c.carOwner=u.id WHERE c.carNo = #{param1}
     </select>
     <select id="selectListVo" resultMap="carVoResultMap">
-        SELECT c.id,c.carNo,u.userName AS carOwner, c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee
+        SELECT c.id,c.carNo,u.userName AS carOwner, c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee,c.carTypeColor
         FROM sys_car c LEFT JOIN cli_user u ON c.carOwner=u.id ${ew.customSqlSegment}
+    </select>
+
+    <select id="selectMapVo" resultMap="carVoResultMap" parameterType="Map">
+        SELECT c.id,c.carNo,u.userName AS carOwner, c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee,c.carTypeColor
+        FROM sys_car c LEFT JOIN cli_user u ON c.carOwner=u.id
+        <where>
+            <if test="filterMap.carno!=null">
+                AND c.carNo = #{filterMap.carno}
+            </if>
+            <if test="filterMap.carowner!=null">
+                AND u.userName = #{filterMap.carowner}
+            </if>
+            <if test="filterMap.carcolor!=null">
+                AND c.carColor = #{filterMap.carcolor}
+            </if>
+            <if test="filterMap.carbrand!=null">
+                AND c.carBrand = #{filterMap.carbrand}
+            </if>
+            <if test="filterMap.carstate!=null">
+                AND c.carState = #{filterMap.carstate}
+            </if>
+            <if test="filterMap.feemin!=null">
+                AND c.fee <![CDATA[ >= ]]> #{filterMap.feemin}
+            </if>
+            <if test="filterMap.feemax!=null">
+                AND c.fee <![CDATA[ <= ]]> #{filterMap.feemax}
+            </if>
+        </where>
     </select>
 
 </mapper>

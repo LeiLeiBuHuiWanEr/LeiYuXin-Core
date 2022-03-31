@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.iloveleiyuxin.websitmanager.vo.CarVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -31,5 +32,7 @@ public interface ISysCarService extends IService<SysCar> {
     CarVo selectOneVo(String number);
 
     List<CarVo> selectList(QueryWrapper queryWrapper);
+
+    List<CarVo> selectByMap(Map<String,String> filterMap);
 
 }

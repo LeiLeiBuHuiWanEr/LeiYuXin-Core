@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -52,6 +53,12 @@ public class SysCarServiceImpl extends ServiceImpl<SysCarMapper, SysCar> impleme
         SysCar current = sysCarMapper.selectOne(new QueryWrapper<SysCar>().eq("carNo",sysCar.getCarno()));
         Assert.notNull(current,"没有车辆信息");
 
+        if(sysCar.getCarowner()!=null){
+            if(cliUserMapper.selectById(sysCar.getCarowner())==null){
+                throw new NullPointerException("没有业主信息");
+            }
+            current.setCarowner(sysCar.getCarowner());
+        }
         if (sysCar.getCarbrand() != null){
             current.setCarbrand(sysCar.getCarbrand());
         }
@@ -78,6 +85,16 @@ public class SysCarServiceImpl extends ServiceImpl<SysCarMapper, SysCar> impleme
     @Override
     public List<CarVo> selectList(QueryWrapper wrapper) {
         return sysCarMapper.selectListVo(wrapper);
+    }
+
+    /**
+     * 把Map转换为QueryWrapper
+     * @param filterMap
+     * @return
+     */
+    @Override
+    public List<CarVo> selectByMap(Map<String, String> filterMap) {
+        return sysCarMapper.selectMapVo(filterMap);
     }
 
 
