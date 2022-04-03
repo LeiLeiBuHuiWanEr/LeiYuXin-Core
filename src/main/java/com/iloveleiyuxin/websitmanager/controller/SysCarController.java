@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
+import com.iloveleiyuxin.websitmanager.entity.CliUser;
 import com.iloveleiyuxin.websitmanager.entity.SysCar;
 import com.iloveleiyuxin.websitmanager.vo.CarVo;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -29,15 +30,36 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys-car")
 public class SysCarController extends BaseController {
+    @GetMapping("info/{id}")
+    public Response selectByID(@PathVariable Integer id){
+        SysCar cliUser = sysCarService.getById(id);
+        Assert.notNull(cliUser,"查无此车！");
+        return Response.succ(cliUser);
+    }
+
     @GetMapping("operate/insert")
     public Response insertCar(){
         String carNo = req.getParameter("carno");
-        String color = req.getParameter("color");
-        Integer owner = Integer.valueOf(req.getParameter("owner"));
-        String carBrand = req.getParameter("brand");
+        String color = req.getParameter("carcolor");
+        Integer owner = Integer.valueOf(req.getParameter("carowner"));
+        String carBrand = req.getParameter("carbrand");
         BigDecimal fee = BigDecimal.valueOf(Double.parseDouble(req.getParameter("fee")));
         String carTC = req.getParameter("cartypecolor");
 
+        SysCar car = new SysCar(carNo,owner,color,carBrand,1,fee,carTC);
+        sysCarService.insertCar(car);
+
+        return Response.succ("");
+    }
+
+    @PostMapping("operate/mapInsert")
+    public Response mapInsert(@RequestBody(required = true)Map<String,String> filterMap){
+        String carNo = filterMap.get("carno");
+        String color = filterMap.get("carcolor");
+        Integer owner = Integer.valueOf(filterMap.get("carowner"));
+        String carBrand = filterMap.get("carbrand");
+        BigDecimal fee = BigDecimal.valueOf(Double.parseDouble(filterMap.get("fee")));
+        String carTC = filterMap.get("cartypecolor");
         SysCar car = new SysCar(carNo,owner,color,carBrand,1,fee,carTC);
         sysCarService.insertCar(car);
 
@@ -93,7 +115,12 @@ public class SysCarController extends BaseController {
     @PostMapping("operate/changeByMap")
     public Response updateByMap(@RequestBody(required = true) Map<String,String> filterMap){
         String number = filterMap.get("carno");
+        String id = filterMap.get("id");
         SysCar sysCar = new SysCar();
+        if (id == null || id.equals("")){
+            throw new LackParamException("缺失参数id");
+        }
+        sysCar.setId(Integer.valueOf(id));
         if (number == null || number.equals("")){
             throw new LackParamException("缺失参数carno");
         }
@@ -113,8 +140,6 @@ public class SysCarController extends BaseController {
             sysCar.setCarstate(Integer.valueOf(state));
         }
         sysCar.setCartypecolor(filterMap.get("cartypecolor"));
-
-        //SysCar sysCar = new SysCar(number,Integer.parseInt(owner),color,brand,state == null ? null:Integer.valueOf(state),fee == null ? null: BigDecimal.valueOf(Double.parseDouble(fee)),tc);
 
         sysCarService.changeCar(sysCar);
 

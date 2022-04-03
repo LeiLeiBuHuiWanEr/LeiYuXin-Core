@@ -73,8 +73,11 @@ public class CliUser extends BaseEntity {
     @TableField("registerDate")
     private LocalDate registerdate;
 
+    @TableField("idCard")
+    private String idcard;
 
-    public CliUser(Integer id,String username, String nickname, String userpassword, String sex, LocalDate birthday, String phone, Integer clirole, Integer locate, Integer healthstate, Integer quarantinestate, Integer permanentresidence, Integer lowincome, LocalDate registerdate) {
+
+    public CliUser(Integer id,String username, String nickname, String userpassword, String sex, LocalDate birthday, String phone, Integer clirole, Integer locate, Integer healthstate, Integer quarantinestate, Integer permanentresidence, Integer lowincome, LocalDate registerdate,String idCard) {
         this.setId(id);
         this.username = username;
         this.nickname = nickname;
@@ -89,5 +92,6 @@ public class CliUser extends BaseEntity {
         this.permanentresidence = permanentresidence;
         this.lowincome = lowincome;
         this.registerdate = registerdate;
+        this.idcard = idcard;
     }
 }

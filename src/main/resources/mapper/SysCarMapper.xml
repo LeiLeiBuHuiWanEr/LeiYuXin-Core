@@ -25,25 +25,28 @@
         SELECT c.id,c.carNo,u.userName AS carOwner, c.carOwner AS ownerNo, c.carColor, c.carBrand,c.carState,c.fee,c.carTypeColor
         FROM sys_car c LEFT JOIN cli_user u ON c.carOwner=u.id
         <where>
-            <if test="filterMap.carno!=null">
+            <if test="filterMap.carno!=null and filterMap.carno!=''">
                 AND c.carNo = #{filterMap.carno}
             </if>
-            <if test="filterMap.carowner!=null">
+            <if test="filterMap.carowner!=null and filterMap.carowner!=''">
                 AND u.userName = #{filterMap.carowner}
             </if>
-            <if test="filterMap.carcolor!=null">
+            <if test="filterMap.carcolor!=null and filterMap.carcolor!=''">
                 AND c.carColor = #{filterMap.carcolor}
             </if>
-            <if test="filterMap.carbrand!=null">
+            <if test="filterMap.cartypecolor!=null and filterMap.cartypecolor!=''">
+                AND c.carTypeColor = #{filterMap.cartypecolor}
+            </if>
+            <if test="filterMap.carbrand!=null and filterMap.carbrand!=''">
                 AND c.carBrand = #{filterMap.carbrand}
             </if>
-            <if test="filterMap.carstate!=null">
+            <if test="filterMap.carstate!=null and filterMap.carstate!=''">
                 AND c.carState = #{filterMap.carstate}
             </if>
-            <if test="filterMap.feemin!=null">
+            <if test="filterMap.feemin!=null and filterMap.feemin!=''">
                 AND c.fee <![CDATA[ >= ]]> #{filterMap.feemin}
             </if>
-            <if test="filterMap.feemax!=null">
+            <if test="filterMap.feemax!=null and filterMap.feemax!=''">
                 AND c.fee <![CDATA[ <= ]]> #{filterMap.feemax}
             </if>
         </where>

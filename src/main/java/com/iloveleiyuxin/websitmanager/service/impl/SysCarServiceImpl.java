@@ -41,6 +41,9 @@ public class SysCarServiceImpl extends ServiceImpl<SysCarMapper, SysCar> impleme
         if(cliUserMapper.selectById(userNo) == null){
             throw new NullPointerException("没有业主信息！");
         }else{
+            if (car.getCartypecolor() == null || car.getCartypecolor().equals("")){
+                car.setCartypecolor("蓝色");
+            }
             sysCarMapper.insert(car);
             log.info("结束事务");
         }
@@ -50,8 +53,11 @@ public class SysCarServiceImpl extends ServiceImpl<SysCarMapper, SysCar> impleme
     @Override
     @Transactional
     public boolean changeCar(SysCar sysCar) {
-        SysCar current = sysCarMapper.selectOne(new QueryWrapper<SysCar>().eq("carNo",sysCar.getCarno()));
+        SysCar current = sysCarMapper.selectOne(new QueryWrapper<SysCar>().eq("id",sysCar.getId()));
         Assert.notNull(current,"没有车辆信息");
+        if (sysCar.getCarno() != null){
+            current.setCarno(sysCar.getCarno());
+        }
 
         if(sysCar.getCarowner()!=null){
             if(cliUserMapper.selectById(sysCar.getCarowner())==null){
@@ -70,6 +76,9 @@ public class SysCarServiceImpl extends ServiceImpl<SysCarMapper, SysCar> impleme
         }
         if (sysCar.getFee() != null){
             current.setFee(sysCar.getFee());
+        }
+        if (sysCar.getCartypecolor() != null){
+            current.setCartypecolor(sysCar.getCartypecolor());
         }
 
         sysCarMapper.updateById(current);

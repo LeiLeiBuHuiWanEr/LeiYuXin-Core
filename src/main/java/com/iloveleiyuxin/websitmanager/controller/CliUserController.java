@@ -45,6 +45,7 @@ public class CliUserController extends BaseController {
         String quarantineState = req.getParameter("quarantineState");
         String permanentResidence = req.getParameter("permanentResidence");
         String lowIncome = req.getParameter("lowIncome");
+        String idCard = req.getParameter("idCard");
         /**
          * 不允许为空的项目，如果为空就会直接返回缺失参数的异常
          */
@@ -85,7 +86,7 @@ public class CliUserController extends BaseController {
 
         CliUser cliUser = new CliUser(
                 userName,nickName,avatar,password,sex,LocalDate.parse(birthday),phone,Integer.valueOf(cliRole),Integer.valueOf(locate),Integer.valueOf(healthState),
-                Integer.valueOf(quarantineState),Integer.valueOf(permanentResidence),Integer.valueOf(lowIncome),LocalDate.now()
+                Integer.valueOf(quarantineState),Integer.valueOf(permanentResidence),Integer.valueOf(lowIncome),LocalDate.now(),idCard
                 );
 
         cliUserService.addCliUser(cliUser);
@@ -113,7 +114,7 @@ public class CliUserController extends BaseController {
         if(filterMap.get("birthday")!=null){
             filterMap.put("birthday",LocalDate.parse(filterMap.get("birthday").toString()));
         }
-
+        filterMap.put("userpassword",bCryptPasswordEncoder.encode(filterMap.get("userpassword").toString()));
         filterMap.put("registerdate",LocalDate.now());
 
         String json;
@@ -146,6 +147,10 @@ public class CliUserController extends BaseController {
         String avt = filterMap.get("avatar");
         if (avt != null && !avt.equals("")){
             currentUser.setAvatar(avt);
+        }
+        String idc = filterMap.get("idcard");
+        if (avt != null && !avt.equals("")){
+            currentUser.setIdcard(idc);
         }
         String nickName = filterMap.get("nickname");
         if (nickName != null && !nickName.equals("")){
