@@ -3,6 +3,7 @@ package com.iloveleiyuxin.websitmanager.mapper;
 import com.iloveleiyuxin.websitmanager.entity.CliUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
+import java.util.*;
 
 /**
  * <p>
@@ -14,5 +15,12 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CliUserMapper extends BaseMapper<CliUser> {
+    List<Map<String,Object>> healthAnalysis();
+
+    List<Map<String,Object>> quarantineAnalysis();
+
+    List<Map<String,Object>> permanentAnalysis();
+
+    List<Map<String,Object>> registerAnalysis();
 
 }

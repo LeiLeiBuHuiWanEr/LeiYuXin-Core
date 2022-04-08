@@ -1,5 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iloveleiyuxin.websitmanager.mapper.CliUserMapper">
+    <select id="healthAnalysis" resultType="java.util.Map">
+        SELECT healthState AS `name`,count(healthState) AS `value` FROM cli_user GROUP BY healthState
+    </select>
+
+    <select id="quarantineAnalysis" resultType="java.util.Map">
+        SELECT quarantineState AS `name`,count(quarantineState) AS `value` FROM cli_user GROUP BY quarantineState
+    </select>
+
+    <select id="permanentAnalysis" resultType="java.util.Map">
+        SELECT permanentResidence AS `name`,count(permanentResidence) AS `value` FROM cli_user GROUP BY permanentResidence
+    </select>
+
+    <select id="registerAnalysis" resultType="java.util.Map">
+        SELECT date_format(registerDate,'%Y-%m-%d') AS `date`,count(registerDate) AS `count` FROM cli_user GROUP BY `date` ORDER BY `date` DESC LIMIT 10;
+    </select>
+
+
+
+
 
 </mapper>

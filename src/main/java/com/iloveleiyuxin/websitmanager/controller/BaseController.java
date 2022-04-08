@@ -16,56 +16,56 @@ import javax.servlet.http.HttpServletResponse;
 import java.time.format.DateTimeFormatter;
 
 public class BaseController {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    public DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Autowired
-    HttpServletRequest req;
+    public HttpServletRequest req;
 
     @Autowired
-    HttpServletResponse resp;
+    public HttpServletResponse resp;
 
     @Autowired
-    RedisUtils redisUtil;
+    public RedisUtils redisUtil;
 
     @Autowired
-    ISysUserService sysUserService;
+    public ISysUserService sysUserService;
 
     @Autowired
-    ISysRoleService sysRoleService;
+    public ISysRoleService sysRoleService;
 
     @Autowired
-    ISysBuildingService sysBuildingService;
+    public ISysBuildingService sysBuildingService;
 
     @Autowired
-    ISysHouseService sysHouseService;
+    public ISysHouseService sysHouseService;
 
     @Autowired
-    ISysUnitService sysUnitService;
+    public ISysUnitService sysUnitService;
 
     @Autowired
-    ISysCarService sysCarService;
+    public ISysCarService sysCarService;
 
     @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+    public BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    ICliUserService cliUserService;
+    public ICliUserService cliUserService;
 
     @Autowired
-    JwtUtils jwtUtils;
+    public JwtUtils jwtUtils;
 
     @Autowired
-    ObjectMapper objectMapper;
+    public ObjectMapper objectMapper;
 
     @Autowired
-    HttpApi http;
+    public HttpApi http;
 
     @Autowired
-    ISysHealthreportService sysHealthreportService;
+    public ISysHealthreportService sysHealthreportService;
 
     @Autowired
-    ISysGeliService sysGeliService;
+    public ISysGeliService sysGeliService;
 
     @Autowired
-    ISysRegionService sysRegionService;
+    public ISysRegionService sysRegionService;
 }

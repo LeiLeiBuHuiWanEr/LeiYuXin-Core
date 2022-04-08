@@ -92,6 +92,6 @@ public class CliUser extends BaseEntity {
         this.permanentresidence = permanentresidence;
         this.lowincome = lowincome;
         this.registerdate = registerdate;
-        this.idcard = idcard;
+        this.idcard = idCard;
     }
 }

@@ -2,6 +2,7 @@ package com.iloveleiyuxin.websitmanager.service;
 
 import com.iloveleiyuxin.websitmanager.entity.CliUser;
 import com.baomidou.mybatisplus.extension.service.IService;
+import java.util.*;
 
 /**
  * <p>
@@ -24,4 +25,12 @@ public interface ICliUserService extends IService<CliUser> {
      */
     boolean updateCliUser(CliUser user);
 
+
+    List<Map<String,Object>> healthAnalysis();
+
+    List<Map<String,Object>> quarantineAnalysis();
+
+    List<Map<String, Object>> permanentAnalysis();
+
+    Map<String,Object> registerAnalysis();
 }

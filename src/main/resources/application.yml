@@ -4,17 +4,17 @@ server:
 spring:
   datasource:
     druid:
-      url: jdbc:mysql://192.168.1.124:3306/community?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      url: jdbc:mysql://124.220.1.132:3306/community?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       #      url: jdbc:mysql://127.0.0.1:3306/community?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
       driver-class-name: com.mysql.cj.jdbc.Driver
       username: root
       #      password: LYX5201314
-      password: 123456
+      password: LYX5201314
       initial-size: 1
       min-idle: 1
       max-active: 20
   redis:
-    host: 192.168.1.124
+    host: www.iloveleiyuxin.com
     port: 6379  #可不配，因为底层默认值为6379
   mvc:
     throw-exception-if-no-handler-found: true

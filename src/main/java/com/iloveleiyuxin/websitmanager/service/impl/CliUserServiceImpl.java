@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.*;
+
 /**
  * <p>
  *  服务实现类
@@ -65,5 +67,70 @@ public class CliUserServiceImpl extends ServiceImpl<CliUserMapper, CliUser> impl
         cliUserMapper.updateById(user);
         log.info("结束事务");
         return true;
+    }
+
+    @Override
+    public List<Map<String, Object>> healthAnalysis() {
+        List<Map<String, Object>> list =  cliUserMapper.healthAnalysis();
+        for (Map<String,Object> item:list) {
+            Integer nameCode = (Integer) item.get("name");
+            switch(nameCode){
+                case 0: item.put("name","健康");
+                    break;
+                case 1: item.put("name","有基础疾病");
+                    break;
+                case 2: item.put("name","有特殊疾病");
+                    break;
+                case 99: item.put("name","发热、咳嗽");
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> quarantineAnalysis() {
+        List<Map<String, Object>> list =  cliUserMapper.quarantineAnalysis();
+        for (Map<String,Object> item:list) {
+            Integer nameCode = (Integer) item.get("name");
+            switch(nameCode){
+                case 0: item.put("name","正常");
+                    break;
+                case 1: item.put("name","集中隔离");
+                    break;
+                case 2: item.put("name","居家隔离");
+                    break;
+                case 3: item.put("name","居家健康监测");
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public List<Map<String, Object>> permanentAnalysis() {
+        List<Map<String, Object>> list =  cliUserMapper.permanentAnalysis();
+        for (Map<String,Object> item:list) {
+            Integer nameCode = (Integer) item.get("name");
+            switch(nameCode){
+                case 0: item.put("name","非常住");
+                    break;
+                case 1: item.put("name","常住");
+            }
+        }
+        return list;
+    }
+
+    @Override
+    public Map<String, Object> registerAnalysis() {
+        List<Map<String,Object>> list = cliUserMapper.registerAnalysis();
+        Map<String,Object> result = new HashMap<>();
+        List<String> axis = new ArrayList();
+        List<Integer> value = new ArrayList();
+        for (Map<String,Object> item:list) {
+            axis.add(item.get("date").toString());
+            value.add(Integer.valueOf(item.get("count").toString()));
+        }
+        result.put("axis",axis);
+        result.put("data",value);
+        return result;
     }
 }
