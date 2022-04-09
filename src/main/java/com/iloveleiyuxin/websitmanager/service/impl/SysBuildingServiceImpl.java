@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  *  服务实现类
@@ -41,5 +44,10 @@ public class SysBuildingServiceImpl extends ServiceImpl<SysBuildingMapper, SysBu
         }
         log.info("结束事务");
         return true;
+    }
+
+    @Override
+    public List<Map<String,Object>> buildingCapacityInfo() {
+        return sysBuildingMapper.selectBuildingCapacityInfo();
     }
 }
