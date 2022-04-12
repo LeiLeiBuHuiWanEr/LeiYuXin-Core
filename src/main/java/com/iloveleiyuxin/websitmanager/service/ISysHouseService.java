@@ -3,6 +3,8 @@ package com.iloveleiyuxin.websitmanager.service;
 import com.iloveleiyuxin.websitmanager.entity.SysHouse;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.*;
+
 /**
  * <p>
  *  服务类
@@ -22,7 +24,7 @@ public interface ISysHouseService extends IService<SysHouse> {
      * @param fee
      * @return
      */
-    boolean addHouse(String buildingNo,String unitNo,String houseNo,Double area,Double fee);
+    boolean addHouse(String buildingNo,String unitNo,String houseNo,Double area,Double fee,String layout);
 
     /**
      * 删除一间房屋
@@ -35,5 +37,10 @@ public interface ISysHouseService extends IService<SysHouse> {
      * 修改房屋信息
      */
     boolean updateHouse(String id,Double fee,Double area,String description);
+
+    /**
+     * 通过Map查询
+     */
+    List<SysHouse> mapSelect(Map<String,String> filterMap);
 
 }

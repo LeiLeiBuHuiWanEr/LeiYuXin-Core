@@ -40,13 +40,13 @@
             <if test="filterMap.carbrand!=null and filterMap.carbrand!=''">
                 AND c.carBrand = #{filterMap.carbrand}
             </if>
-            <if test="filterMap.carstate!=null and filterMap.carstate!=''">
+            <if test="filterMap.carstate!=null and filterMap.carstate!=-1">
                 AND c.carState = #{filterMap.carstate}
             </if>
-            <if test="filterMap.feemin!=null and filterMap.feemin!=''">
+            <if test="filterMap.feemin!=null and filterMap.feemin!=-1">
                 AND c.fee <![CDATA[ >= ]]> #{filterMap.feemin}
             </if>
-            <if test="filterMap.feemax!=null and filterMap.feemax!=''">
+            <if test="filterMap.feemax!=null and filterMap.feemax!=-1">
                 AND c.fee <![CDATA[ <= ]]> #{filterMap.feemax}
             </if>
         </where>

@@ -18,7 +18,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public class SysHouse extends BaseInsertEntity {
 
-    public SysHouse(Integer id,Integer building, Integer unit, String name, Integer state, BigDecimal area, BigDecimal servicefeebasic) {
+    public SysHouse(Integer id,Integer building, Integer unit, String name, Integer state, BigDecimal area, BigDecimal servicefeebasic,String layout) {
         this.setId(id);
         this.building = building;
         this.unit = unit;
@@ -26,6 +26,7 @@ public class SysHouse extends BaseInsertEntity {
         this.state = state;
         this.area = area;
         this.servicefeebasic = servicefeebasic;
+        this.layout = layout;
     }
 
     private static final long serialVersionUID = 1L;
@@ -45,6 +46,8 @@ public class SysHouse extends BaseInsertEntity {
 
     @TableField("serviceFeeBasic")
     private BigDecimal servicefeebasic;
+
+    private String layout;
 
 
 }

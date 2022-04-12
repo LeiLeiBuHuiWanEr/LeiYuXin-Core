@@ -6,6 +6,7 @@ import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.entity.SysUser;
 import com.iloveleiyuxin.websitmanager.service.ISysUserService;
+import com.iloveleiyuxin.websitmanager.utils.FileUpload;
 import com.iloveleiyuxin.websitmanager.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -25,13 +27,17 @@ public class TestController extends BaseController{
     ISysUserService sysUserService;
 
 
-
     @Autowired
     RedisUtils redisUtil;
 
     @GetMapping("/test/t")
     public Response test() {
-        return Response.succ(sysUserService.getByUserId(2));
+        File target = new File("D:/Test");
+        if(!target.exists()){
+            target.mkdirs();
+        }
+
+        return Response.succ(null);
     }
 
     @GetMapping("test/redis")

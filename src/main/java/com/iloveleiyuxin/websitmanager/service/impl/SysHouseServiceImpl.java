@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -41,7 +42,7 @@ public class SysHouseServiceImpl extends ServiceImpl<SysHouseMapper, SysHouse> i
 
     @Transactional
     @Override
-    public boolean addHouse(String buildingNo, String unitNo, String houseNo, Double area, Double fee) {
+    public boolean addHouse(String buildingNo, String unitNo, String houseNo, Double area, Double fee,String layout) {
         log.info("开始事务");
         Integer fullHouseNo;
         Integer fullUnitNo;
@@ -61,13 +62,9 @@ public class SysHouseServiceImpl extends ServiceImpl<SysHouseMapper, SysHouse> i
         if(selectedUnit == null){
             throw new NullPointerException("没有查到单元信息！");
         }
-        log.info("查到单元信息"+selectedUnit+"，正在准备更新单元信息!");
-        selectedUnit.setHousecounts(selectedUnit.getHousecounts() + 1);
-        sysUnitMapper.update(selectedUnit,wrapper);
-        log.info("单元信息更新完毕！");
 
         sysHouseMapper.insert(new SysHouse(
-                fullHouseNo,Integer.valueOf(buildingNo),fullUnitNo,buildingNo+"楼"+unitNo+"单元"+houseNo+"号",0,new BigDecimal(area),new BigDecimal(fee)
+                fullHouseNo,Integer.valueOf(buildingNo),fullUnitNo,buildingNo+"楼"+unitNo+"单元"+houseNo+"号",0,new BigDecimal(area),new BigDecimal(fee),layout
         ));
 
         log.info("结束事务");
@@ -111,5 +108,10 @@ public class SysHouseServiceImpl extends ServiceImpl<SysHouseMapper, SysHouse> i
 
         sysHouseMapper.update(preUpdate,new QueryWrapper<SysHouse>().eq("id",id));
         return true;
+    }
+
+    @Override
+    public List<SysHouse> mapSelect(Map<String, String> filterMap) {
+        return sysHouseMapper.mapSelect(filterMap);
     }
 }

@@ -11,10 +11,7 @@ import com.iloveleiyuxin.websitmanager.entity.SysHouse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -66,6 +63,7 @@ public class SysHouseController extends BaseController {
         String houseNo = req.getParameter("houseNo");
         String area = req.getParameter("area");
         String fee = req.getParameter("fee");
+        String layout = req.getParameter("layout");
         Double areaD;
         Double feeD;
 
@@ -80,13 +78,22 @@ public class SysHouseController extends BaseController {
             return Response.fail(CodeEnum.PARAM_NOT_VALID,"参数格式不正确");
         }
 
-        boolean bool = sysHouseService.addHouse(buildingNo,unitNo,houseNo,areaD,feeD);
+        boolean bool = sysHouseService.addHouse(buildingNo,unitNo,houseNo,areaD,feeD,layout);
 
         if(bool){
             return Response.succ("");
         }else {
             return Response.fail("添加失败");
         }
+    }
+
+    @PostMapping("info/mapSelect")
+    public Response MapSelect(@RequestBody(required = true)Map<String,String> filterMap){
+        List<SysHouse> list = sysHouseService.mapSelect(filterMap);
+        if(list.size()==0){
+            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空！");
+        }
+        return Response.succ(list);
     }
 
     /**
