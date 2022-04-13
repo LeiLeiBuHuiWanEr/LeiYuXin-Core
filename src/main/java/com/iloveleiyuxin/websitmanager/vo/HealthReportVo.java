@@ -44,5 +44,5 @@ public class HealthReportVo implements Serializable {
      * 0不需要，1需要
      */
     @TableField("needQuarantine")
-    private Integer needquarantine;
+    private String needquarantine;
 }

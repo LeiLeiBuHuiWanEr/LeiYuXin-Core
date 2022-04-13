@@ -5,7 +5,7 @@ import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -20,5 +20,7 @@ public interface ISysHealthreportService extends IService<SysHealthreport> {
     boolean newReport(SysHealthreport sysHealthreport);
 
     List<HealthReportVo> selectVo(QueryWrapper<SysHealthreport> queryWrapper);
+
+    List<HealthReportVo> mapSelect(Map<String,String> filterMap);
 
 }

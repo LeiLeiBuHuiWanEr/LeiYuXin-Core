@@ -13,9 +13,30 @@
     </resultMap>
 
     <select id="selectVo" resultMap="healthVoResultMap">
-        SELECT hr.id,hr.healthUser,u.userName,hr.healthDescription,hr.reportDate,hr.bodyTemperature,hr.rnaTest,hr.needQuarantine
+        SELECT hr.id,hr.healthUser,u.userName,hr.healthDescription,hr.reportDate,hr.bodyTemperature,hr.rnaTest,
+                (CASE WHEN hr.needQuarantine = 1 THEN '需要' WHEN hr.needQuarantine = 0 THEN '不需要' ELSE '数据错误' END) needQuarantine
         FROM sys_healthreport hr LEFT JOIN sys_user u ON hr.healthuser=u.id
             ${ew.customSqlSegment}
+    </select>
+
+    <select id="mapSelect" resultMap="healthVoResultMap" parameterType="Map">
+        SELECT hr.id,hr.healthUser,u.userName,hr.healthDescription,hr.reportDate,hr.bodyTemperature,hr.rnaTest,
+                (CASE WHEN hr.needQuarantine = 1 THEN '需要' WHEN hr.needQuarantine = 0 THEN '不需要' ELSE '数据错误' END) needQuarantine
+        FROM sys_healthreport hr LEFT JOIN sys_user u ON hr.healthuser=u.id
+        <where>
+            <if test="filterMap.userid != null and filterMap.userid != ''">
+                AND hr.healthUser = #{filterMap.userid}
+            </if>
+            <if test="filterMap.begindate != null and filterMap.begindate !=''">
+                AND hr.reportDate <![CDATA[ >= ]]> #{filterMap.begindate}
+            </if>
+            <if test="filterMap.enddate != null and filterMap.enddate !=''">
+                AND hr.reportDate <![CDATA[ <= ]]> #{filterMap.begindate}
+            </if>
+            <if test="filterMap.needquarantine != null and filterMap.needquarantine != ''">
+                AND hr.needquarantine = #{filterMap.needquarantine}
+            </if>
+        </where>
     </select>
 
 </mapper>

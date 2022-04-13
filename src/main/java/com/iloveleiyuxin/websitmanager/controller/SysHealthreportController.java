@@ -2,22 +2,18 @@ package com.iloveleiyuxin.websitmanager.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.iloveleiyuxin.websitmanager.common.CodeEnum;
 import com.iloveleiyuxin.websitmanager.common.Const;
 import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysHealthreport;
 import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -30,6 +26,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/sys-healthreport")
 public class SysHealthreportController extends BaseController {
+    
+    @PostMapping("info/mapSelect")
+    public Response mapSelect(@RequestBody(required = false)Map<String,String> filterMap){
+        List<HealthReportVo> list = sysHealthreportService.mapSelect(filterMap);
+        if (list.size() == 0){
+            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空");
+        }
+        return Response.succ(list);
+    }
 
     //新增一条健康报告数据
     @GetMapping("operate/newReport")

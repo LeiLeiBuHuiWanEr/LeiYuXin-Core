@@ -8,7 +8,7 @@ import com.iloveleiyuxin.websitmanager.vo.HealthReportVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -21,4 +21,6 @@ import java.util.List;
 @Mapper
 public interface SysHealthreportMapper extends BaseMapper<SysHealthreport> {
     List<HealthReportVo> selectVo(@Param(Constants.WRAPPER) QueryWrapper<SysHealthreport> wrapper);
+
+    List<HealthReportVo> mapSelect(@Param("filterMap") Map<String,String> filterMap);
 }

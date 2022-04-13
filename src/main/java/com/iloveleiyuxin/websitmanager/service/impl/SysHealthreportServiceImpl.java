@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -55,5 +56,10 @@ public class SysHealthreportServiceImpl extends ServiceImpl<SysHealthreportMappe
     @Override
     public List<HealthReportVo> selectVo(QueryWrapper<SysHealthreport> queryWrapper) {
         return sysHealthreportMapper.selectVo(queryWrapper);
+    }
+
+    @Override
+    public List<HealthReportVo> mapSelect(Map<String, String> filterMap) {
+        return sysHealthreportMapper.mapSelect(filterMap);
     }
 }
