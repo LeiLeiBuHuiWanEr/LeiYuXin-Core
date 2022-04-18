@@ -27,7 +27,7 @@ public class SysService extends BaseEntity {
     private Integer serviceuser;
 
     /**
-     * 服务类型
+     * 服务类型 1:公共服务 2:紧急救助 3:跑腿代买 10:土木维修 11:水电维修 12:计算机维修 13:网络维修 99:其他
      */
     @TableField("serviceType")
     private Integer servicetype;

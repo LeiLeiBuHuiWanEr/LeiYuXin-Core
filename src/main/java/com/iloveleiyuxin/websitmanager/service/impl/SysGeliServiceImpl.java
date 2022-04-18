@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -55,5 +56,10 @@ public class SysGeliServiceImpl extends ServiceImpl<SysGeliMapper, SysGeli> impl
     @Override
     public List<GeLiVo> selectVo(QueryWrapper<SysGeli> queryWrapper) {
         return sysGeliMapper.selectVo(queryWrapper);
+    }
+
+    @Override
+    public List<GeLiVo> mapSelectVo(Map<String, String> filterMap) {
+        return sysGeliMapper.mapSelectVo(filterMap);
     }
 }

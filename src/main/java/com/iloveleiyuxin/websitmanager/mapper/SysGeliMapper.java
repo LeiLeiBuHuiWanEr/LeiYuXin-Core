@@ -8,7 +8,7 @@ import com.iloveleiyuxin.websitmanager.vo.GeLiVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * <p>
@@ -21,4 +21,6 @@ import java.util.List;
 @Repository
 public interface SysGeliMapper extends BaseMapper<SysGeli> {
     List<GeLiVo> selectVo(@Param(Constants.WRAPPER) QueryWrapper queryWrapper);
+
+    List<GeLiVo> mapSelectVo(@Param("filterMap") Map<String,String> filterMap);
 }

@@ -31,7 +31,7 @@
                 AND hr.reportDate <![CDATA[ >= ]]> #{filterMap.begindate}
             </if>
             <if test="filterMap.enddate != null and filterMap.enddate !=''">
-                AND hr.reportDate <![CDATA[ <= ]]> #{filterMap.begindate}
+                AND hr.reportDate <![CDATA[ <= ]]> #{filterMap.enddate}
             </if>
             <if test="filterMap.needquarantine != null and filterMap.needquarantine != ''">
                 AND hr.needquarantine = #{filterMap.needquarantine}

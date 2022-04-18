@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.iloveleiyuxin.websitmanager.vo.GeLiVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -19,4 +20,6 @@ public interface ISysGeliService extends IService<SysGeli> {
     boolean isGeli(Integer id);
 
     List<GeLiVo> selectVo(QueryWrapper<SysGeli> queryWrapper);
+
+    List<GeLiVo> mapSelectVo(Map<String,String> filterMap);
 }

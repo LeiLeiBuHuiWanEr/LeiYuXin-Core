@@ -8,11 +8,8 @@ import com.iloveleiyuxin.websitmanager.common.Response;
 import com.iloveleiyuxin.websitmanager.common.exception.LackParamException;
 import com.iloveleiyuxin.websitmanager.entity.SysGeli;
 import com.iloveleiyuxin.websitmanager.vo.GeLiVo;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RestController;
 import com.iloveleiyuxin.websitmanager.controller.BaseController;
 
 import java.time.LocalDateTime;
@@ -32,6 +29,14 @@ import java.util.Map;
 @RestController
 @RequestMapping("/sys-geli")
 public class SysGeliController extends BaseController {
+    @PostMapping("info/mapSelect")
+    public Response MapSelectVo(@RequestBody Map<String,String> filterMap){
+        List<GeLiVo> list = sysGeliService.mapSelectVo(filterMap);
+        if(filterMap.size()==0){
+            return Response.fail(CodeEnum.EMPTY_LIST_OR_MAP,"查询结果为空");
+        }
+        return Response.succ(list);
+    }
     /**
      * 根据传参新增一个记录
      * @return

@@ -29,7 +29,7 @@ public class HealthReportVo implements Serializable {
     private String healthdescription;
 
     @TableField("reportDate")
-    private LocalDateTime reportdate;
+    private String reportdate;
 
     @TableField("bodyTemperature")
     private Double bodytemperature;

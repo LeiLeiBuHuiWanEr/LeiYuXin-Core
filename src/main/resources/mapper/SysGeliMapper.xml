@@ -16,9 +16,40 @@
 
     <select id="selectVo" resultMap="geliResultMap">
         SELECT
-            u.id AS geliUser,u.userName,gl.geliDescription,gl.geliType,gl.geliReason,gl.geliDateCount,gl.beginDate,gl.endDate,gl.rnaTest,r.region_name AS lastPlace
+            u.id AS geliUser,u.userName,gl.geliDescription,
+            (CASE WHEN gl.geliType = 1 THEN '居家隔离' WHEN gl.geliType = 2 THEN '集中隔离' WHEN gl.geliType = 3 THEN '定点医院隔离' ELSE '数据错误') AS geliType,
+            gl.geliReason,gl.geliDateCount,gl.beginDate,gl.endDate,gl.rnaTest,r.region_name AS lastPlace
         FROM sys_geli gl LEFT JOIN cli_user u ON gl.geliUser=u.id
             LEFT JOIN sys_region r ON gl.lastPlace = r.region_code ${ew.customSqlSegment}
+    </select>
+
+    <select id="mapSelectVo" resultMap="geliResultMap" parameterType="Map">
+        SELECT
+            u.id AS geliUser,u.userName,gl.geliDescription,
+            (CASE WHEN gl.geliType = 1 THEN '居家隔离' WHEN gl.geliType = 2 THEN '集中隔离' WHEN gl.geliType = 3 THEN '定点医院隔离' ELSE '数据错误') AS geliType,
+            gl.geliReason,gl.geliDateCount,gl.beginDate,gl.endDate,gl.rnaTest,r.region_name AS lastPlace
+        FROM sys_geli gl LEFT JOIN cli_user u ON gl.geliUser=u.id
+                         LEFT JOIN sys_region r ON gl.lastPlace = r.region_code
+        <where>
+            <if test="filterMap.userid != null and filterMap.userid !=''">
+                AND u.id = #{filterMap.userid}
+            </if>
+            <if test="filterMap.gelitype != null and filterMap.gelitype != ''">
+                AND gl.geliType = #{filterMap.gelitype}
+            </if>
+            <if test="filterMap.begindatemin != null and filterMap.begindatemin != ''">
+                AND gl.beginDate <![CDATA[ >= ]]> #{filterMap.beginDatemin}
+            </if>
+            <if test="filterMap.begindateminax != null and filterMap.begindatemax != ''">
+                AND gl.beginDate <![CDATA[ <= ]]> #{filterMap.beginDatemax}
+            </if>
+            <if test="filterMap.enddatemin != null and filterMap.enddatemin != ''">
+                AND gl.endDate <![CDATA[ >= ]]> #{filterMap.endDatemin}
+            </if>
+            <if test="filterMap.enddateminax != null and filterMap.enddatemax != ''">
+                AND gl.endDate <![CDATA[ <= ]]> #{filterMap.endDatemax}
+            </if>
+        </where>
     </select>
 
 </mapper>
