@@ -7,6 +7,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.firewall.RequestRejectedException;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -68,6 +69,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = HttpRequestMethodNotSupportedException.class)
     public Response handler(HttpRequestMethodNotSupportedException exception){
         return Response.fail(CodeEnum.METHOD_NOT_ALLOWED, "HTTP Status : 405 Method Not Allowed when"+ " "+exception.getMethod() + " ,you need to "+ Objects.requireNonNull(exception.getSupportedMethods())[0]);
+    }
+
+    @ResponseStatus(HttpStatus.UNSUPPORTED_MEDIA_TYPE)
+    @ExceptionHandler(value = HttpMediaTypeNotSupportedException.class)
+    public Response handler(HttpMediaTypeNotSupportedException exception){
+        return Response.fail(CodeEnum.UNSUPPORTED_MEDIA_TYPE, "HTTP Status : 415 Unsupported Media Type");
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

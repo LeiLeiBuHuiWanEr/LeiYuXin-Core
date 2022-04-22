@@ -4,7 +4,7 @@
     <resultMap id="SysServiceResultMap" type="com.iloveleiyuxin.websitmanager.vo.ServiceVo">
         <id column="id" property="id"/>
         <result column="serviceUserId" property="serviceuserid"/>
-        <result column="serviceUser" property="serviceUser"/>
+        <result column="serviceUser" property="serviceuser"/>
         <result column="serviceType" property="servicetype"/>
         <result column="serviceDescription" property="servicedescription"/>
         <result column="createDate" property="createdate"/>
@@ -19,7 +19,7 @@
                      WHEN serv.serviceType = 10 THEN '土木维修' WHEN serv.serviceType = 11 THEN '水电维修' WHEN serv.serviceType = 12 THEN '计算机维修'
                      WHEN serv.serviceType = 13 THEN '网络维修' ELSE '其他' END) AS serviceType,
                serv.serviceDescription,serv.createDate,serv.endDate,
-               (CASE WHEN serv.serviceState = 0 THEN '未处理' WHEN serv.serviceState = 1 THEN '处理中' WHEN serv.serviceState = 2 THEN '待评价' ELSE '评价完成') AS serviceState,
+               (CASE WHEN serv.serviceState = 0 THEN '未处理' WHEN serv.serviceState = 1 THEN '处理中' WHEN serv.serviceState = 2 THEN '待评价' ELSE '评价完成' END) AS serviceState,
                serv.serviceScore
             FROM sys_service serv LEFT JOIN cli_user cu ON serv.serviceUser=cu.id
     </select>

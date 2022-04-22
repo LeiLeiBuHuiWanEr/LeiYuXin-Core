@@ -19,6 +19,8 @@ public class CodeEnum {
     public static final int NOT_FOUND = 404;
     public static final int LEIYUXIN_FALLEN_IN_LOVE = 4041;
     public static final int METHOD_NOT_ALLOWED = 405;
+
+    public static final int UNSUPPORTED_MEDIA_TYPE = 415;
     public static final int REQUEST_REJECTED = 4051;
     //异常
     public static final int DO_NOT_LOGIN = 9000;

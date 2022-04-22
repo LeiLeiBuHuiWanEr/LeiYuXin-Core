@@ -125,10 +125,10 @@ public class CliUserServiceImpl extends ServiceImpl<CliUserMapper, CliUser> impl
         Map<String,Object> result = new HashMap<>();
         List<String> axis = new ArrayList();
         List<Integer> value = new ArrayList();
-        for (Map<String,Object> item:list) {
+        list.forEach (item->{
             axis.add(item.get("date").toString());
             value.add(Integer.valueOf(item.get("count").toString()));
-        }
+        });
         result.put("axis",axis);
         result.put("data",value);
         return result;

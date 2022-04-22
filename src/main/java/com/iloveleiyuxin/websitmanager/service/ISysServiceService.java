@@ -2,6 +2,9 @@ package com.iloveleiyuxin.websitmanager.service;
 
 import com.iloveleiyuxin.websitmanager.entity.SysService;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.iloveleiyuxin.websitmanager.vo.ServiceVo;
+
+import java.util.*;
 
 /**
  * <p>
@@ -12,5 +15,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @since 2022-04-09
  */
 public interface ISysServiceService extends IService<SysService> {
+    List<ServiceVo> mapSelectVo(Map<String,String> filterMap);
 
 }

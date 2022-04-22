@@ -68,4 +68,7 @@ public class BaseController {
 
     @Autowired
     public ISysRegionService sysRegionService;
+
+    @Autowired
+    public ISysServiceService sysServiceService;
 }
