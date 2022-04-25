@@ -37,5 +37,10 @@ v0.1.0虎年特别版
 2022-02-14 LeiYuXin-Core Single Application v0.1.2 BingDwenDwen Special Edition
 v0.1.2冰墩墩特别版
 
+2022-02-20 LeiYuXin-Core Single Application v0.1.3 BingDwenDwen Special Edition
+v0.1.3冰墩墩特别版
+
+2022-03-27 LeiYuXin-Core Single Application v0.1.4 MU5735
+沉痛悼念3·21东航客机坠毁事故的132名遇难同胞！
 
 LeiYuXin-Core：Microservice （分布式微服务版，简称LCMS） 基于SpringCloud Alibaba，将于2022年5月20日前发行公开版，敬请期待！

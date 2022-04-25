@@ -9,8 +9,8 @@ ${AnsiColor.BRIGHT_BLUE}
                            /\____/
                            \_/__/
 ${AnsiColor.BLACK}
------LeiYuXin-Core Single Application(LCSA) 0.1.3 BingDwenDwen Edition Powered by SpringBoot ${spring-boot.version} MyBatisPlus 3.4.1--------
-                                 LeiYuXin-Core Single Application (LCSA)冰墩墩特别版
+-----LeiYuXin-Core Single Application(LCSA) 0.1.5 BingDwenDwen Powered by SpringBoot ${spring-boot.version} MyBatisPlus 3.4.1--------
+                                 LeiYuXin-Core Single Application (LCSA) 冰墩墩特别版
  BingDwenDwen: Mascot of XXIV Olympic Winter Game Beijing 2022
 |-----------------------------------------------------------------------------------------------------------------------|
 |                                         .';:`                           .   .`'.                                      |
