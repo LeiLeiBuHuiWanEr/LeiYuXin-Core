@@ -62,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/favicon.ico",
             "/test/*",
             "/tools/*",
-            "/charts/*/*"
+            "/charts/*/*",
+            "/socketTest"
 
     };
 
