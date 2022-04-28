@@ -21,8 +21,4 @@ public class TestSocketController {
 
     }
 
-    @OnMessage
-    public void onMessage(Session session){
-
-    }
 }
