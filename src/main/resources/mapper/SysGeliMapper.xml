@@ -17,7 +17,7 @@
     <select id="selectVo" resultMap="geliResultMap">
         SELECT
             u.id AS geliUser,u.userName,gl.geliDescription,
-            (CASE WHEN gl.geliType = 1 THEN '居家隔离' WHEN gl.geliType = 2 THEN '集中隔离' WHEN gl.geliType = 3 THEN '定点医院隔离' ELSE '数据错误') AS geliType,
+            (CASE WHEN gl.geliType = 1 THEN '居家隔离' WHEN gl.geliType = 2 THEN '集中隔离' WHEN gl.geliType = 3 THEN '定点医院隔离' ELSE '数据错误' END) AS geliType,
             gl.geliReason,gl.geliDateCount,gl.beginDate,gl.endDate,gl.rnaTest,r.region_name AS lastPlace
         FROM sys_geli gl LEFT JOIN cli_user u ON gl.geliUser=u.id
             LEFT JOIN sys_region r ON gl.lastPlace = r.region_code ${ew.customSqlSegment}
@@ -26,7 +26,7 @@
     <select id="mapSelectVo" resultMap="geliResultMap" parameterType="Map">
         SELECT
             u.id AS geliUser,u.userName,gl.geliDescription,
-            (CASE WHEN gl.geliType = 1 THEN '居家隔离' WHEN gl.geliType = 2 THEN '集中隔离' WHEN gl.geliType = 3 THEN '定点医院隔离' ELSE '数据错误') AS geliType,
+            (CASE WHEN gl.geliType = 1 THEN '居家隔离' WHEN gl.geliType = 2 THEN '集中隔离' WHEN gl.geliType = 3 THEN '定点医院隔离' ELSE '数据错误' END) AS geliType,
             gl.geliReason,gl.geliDateCount,gl.beginDate,gl.endDate,gl.rnaTest,r.region_name AS lastPlace
         FROM sys_geli gl LEFT JOIN cli_user u ON gl.geliUser=u.id
                          LEFT JOIN sys_region r ON gl.lastPlace = r.region_code

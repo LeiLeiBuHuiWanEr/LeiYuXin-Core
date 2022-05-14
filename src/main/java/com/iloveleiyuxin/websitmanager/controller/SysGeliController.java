@@ -77,14 +77,14 @@ public class SysGeliController extends BaseController {
      * @param filterMap
      * @return
      */
-    @GetMapping("operate/mapInsert")
+    @PostMapping("operate/mapInsert")
     public Response mapInsert(@RequestBody Map<String,Object> filterMap){
-        if(!filterMap.containsKey("gelidatecount")||!filterMap.containsKey("gelitype")|| !filterMap.containsKey("userid")){
+        if(!filterMap.containsKey("gelidatecount")||!filterMap.containsKey("gelitype")|| !filterMap.containsKey("geliuser")){
             throw new LackParamException("缺失参数");
         }
 
         LocalDateTime start = LocalDateTime.now();
-        LocalDateTime end = start.plusDays(Integer.parseInt((String) filterMap.get("count")));
+        LocalDateTime end = start.plusDays(Integer.parseInt(filterMap.get("gelidatecount").toString()));
         filterMap.put("begindate",start);
         filterMap.put("enddate",end);
 

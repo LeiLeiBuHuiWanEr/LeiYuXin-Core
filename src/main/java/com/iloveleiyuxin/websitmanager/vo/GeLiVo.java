@@ -24,7 +24,7 @@ public class GeLiVo {
      * 隔离类型，1为居家隔离，2为集中隔离，3为定点医院隔离
      */
     @TableField("geliType")
-    private Integer gelitype;
+    private String gelitype;
 
     @TableField("geliReason")
     private String gelireason;
@@ -36,10 +36,10 @@ public class GeLiVo {
     private Integer gelidatecount;
 
     @TableField("beginDate")
-    private LocalDateTime begindate;
+    private String begindate;
 
     @TableField("endDate")
-    private LocalDateTime enddate;
+    private String enddate;
 
     @TableField("rnaTest")
     private String rnatest;

@@ -19,6 +19,8 @@ import java.util.Map;
 public interface ISysGeliService extends IService<SysGeli> {
     boolean isGeli(Integer id);
 
+    boolean save(SysGeli sysGeli);
+
     List<GeLiVo> selectVo(QueryWrapper<SysGeli> queryWrapper);
 
     List<GeLiVo> mapSelectVo(Map<String,String> filterMap);

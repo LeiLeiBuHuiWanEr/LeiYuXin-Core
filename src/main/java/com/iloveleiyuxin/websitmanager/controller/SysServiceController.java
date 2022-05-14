@@ -32,7 +32,6 @@ public class SysServiceController extends BaseController {
         }
 
         return Response.succ(result);
-
     }
 
 }
