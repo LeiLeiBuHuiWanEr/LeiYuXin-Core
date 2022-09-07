@@ -5,6 +5,7 @@ import com.iloveleiyuxin.websitmanager.common.exception.KaptchaException;
 import com.iloveleiyuxin.websitmanager.common.Const;
 import com.iloveleiyuxin.websitmanager.common.exception.LeiYuXinFallenInLoveException;
 import com.iloveleiyuxin.websitmanager.utils.RedisUtils;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.AuthenticationException;
@@ -19,12 +20,11 @@ import java.io.IOException;
 
 @Slf4j
 @Component
+@AllArgsConstructor
 public class KaptchaFilter extends OncePerRequestFilter{
     private final String loginUrl = "/login";
-    @Autowired
     RedisUtils redisUtil;
 
-    @Autowired
     LoginFailureHandler loginFailureHandler;
 
     @Override

@@ -17,4 +17,6 @@ import java.util.*;
 public interface ISysServiceService extends IService<SysService> {
     List<ServiceVo> mapSelectVo(Map<String,String> filterMap);
 
+    SysService change(SysService sysService);
+
 }

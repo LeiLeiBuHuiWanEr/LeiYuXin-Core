@@ -25,7 +25,7 @@ package com.iloveleiyuxin.websitmanager.common.exception;
  * stack trace was not writable}.
  *
  * @author  LeiYuXin's Boyfriend
- * @since   JDK1.0
+ * @since   LCSA 0.1.2 Year Of the Tiger
  */
 public class LeiYuXinFallenInLoveException extends RuntimeException {
     private static final long serialVersionUID = 200101015201314L;

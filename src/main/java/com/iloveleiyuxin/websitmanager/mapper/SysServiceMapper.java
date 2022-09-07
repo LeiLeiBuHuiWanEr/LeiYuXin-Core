@@ -19,4 +19,5 @@ import java.util.*;
 @Mapper
 public interface SysServiceMapper extends BaseMapper<SysService> {
     List<ServiceVo> mapSelectVo(@Param("filterMap")Map<String,String> filterMap);
+
 }

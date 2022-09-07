@@ -63,7 +63,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/test/*",
             "/tools/*",
             "/charts/*/*",
-            "/socketTest"
+            "/socketTest",
+            "/actuator",
+            "/actuator/*"
 
     };
 

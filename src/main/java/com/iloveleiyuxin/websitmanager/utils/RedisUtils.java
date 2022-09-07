@@ -1,5 +1,6 @@
 package com.iloveleiyuxin.websitmanager.utils;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
@@ -13,9 +14,10 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@AllArgsConstructor
 public class RedisUtils {
 
-    @Autowired
+
     private RedisTemplate redisTemplate;
 
     /**

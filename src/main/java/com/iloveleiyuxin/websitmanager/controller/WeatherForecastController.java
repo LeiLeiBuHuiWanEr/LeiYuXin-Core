@@ -53,4 +53,26 @@ public class WeatherForecastController extends BaseController{
         assert result != null;
         return Response.succ(result.get("data"));
     }
+
+    @GetMapping("yiqing")
+    public Response yiqingInfo() throws Exception {
+        String url = "https://ailib.hebei.com.cn:9553/yqbg_hbtotal";
+        String s = "";
+        s = http.doGet(url);
+        Map<String,Object> result = null;
+        result = objectMapper.readValue(s,HashMap.class);
+        assert result != null;
+        return Response.succ(result.get("result"));
+    }
+
+    @GetMapping("fullyiqing")
+    public Response fullYiQingInfo() throws  Exception{
+        String url = "https://c.m.163.com/ug/api/wuhan/app/data/list-total";
+        String s = "";
+        s = http.doGet(url);
+        Map<String,Object> result = null;
+        result = objectMapper.readValue(s,HashMap.class);
+        assert result != null;
+        return Response.succ(result.get("data"));
+    }
 }

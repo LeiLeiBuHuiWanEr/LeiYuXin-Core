@@ -1,8 +1,12 @@
 package com.iloveleiyuxin.websitmanager;
 
+import com.iloveleiyuxin.websitmanager.mqtt.MoquetteServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.ApplicationContext;
+
+import java.io.IOException;
 
 /**
  * SpringBoot启动器
@@ -18,9 +22,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Slf4j
 public class WebsitManagerApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Long time = System.currentTimeMillis();
-        SpringApplication.run(WebsitManagerApplication.class, args);
+        SpringApplication application = new SpringApplication(WebsitManagerApplication.class);
+        final ApplicationContext context = application.run(args);
+        MoquetteServer server = context.getBean(MoquetteServer.class);
+        server.startServer();
+
+
         log.info("===LeiYuXin-Core启动耗时："+(System.currentTimeMillis()-time)+"毫秒===");
     }
 
